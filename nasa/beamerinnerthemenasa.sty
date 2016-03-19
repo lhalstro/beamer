@@ -1,6 +1,10 @@
 \mode<presentation>
 
-\usepackage{xcolor}
+\usepackage{textpos} %position pictures
+\usepackage{calc}
+
+%CUSTOM COLORS
+\usepackage{xcolor} %custom colors
 \definecolor{nasared}{RGB}{252, 61, 33}
 \definecolor{nasablue}{RGB}{11, 61, 145}
 
@@ -12,7 +16,12 @@
 
   %VERTICAL BOUNDING LINES
   %vertical margins
-  \newcommand\mytopmargin{1cm}
+
+  %Top image height
+  \newcommand\picheight{0.7cm}
+  %percentage of total vertical padding about image
+  \newcommand\pad{0.2}
+  \newcommand\mytopmargin{\picheight*(1+\pad)}
   \newcommand\mybotmargin{0.4cm}
   %offset between margin lines
   \newcommand\offset{0.05cm}
@@ -30,6 +39,23 @@
     \draw[nasared]  ([yshift=(\mybotmargin+\offset)]current page.south west)
                  -- ([yshift=(\mybotmargin+\offset),xshift=\paperwidth]current page.south west);
   }
+
+  %NASA MEATBALL
+    %node position is center of picture,
+    %shift left and down by half hight, then shift down by half pad
+  \node (meatball) [inner sep=0,
+                    xshift=-(\picheight/2+\picheight*\pad),
+                    yshift=-(\picheight/2+\picheight*\pad/2)] at (\paperwidth,0)
+    {\includegraphics[height=\picheight]{Images/NASA_Meatball.png}};
+
+    % \node (interpCFD) [process, left of=config, align=center, xshift=-5cm]
+    %   {Spacial Interpolation of CFD \\ at Port Locations};
+
+  % \includegraphics[height=\mytopmargin]{Images/NASA_Meatball.png}
+
+
+
+
   % \noindent\makebox[\linewidth]{\rule{\paperwidth}{1.0pt}}
   % \noindent\makebox[\linewidth]{\rule{\textwidth}{1.0pt}}
 
