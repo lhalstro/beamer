@@ -1,46 +1,99 @@
 \documentclass{beamer}
+\usetheme{nasa}
 % \usetheme{Malmoe}
 % \usecolortheme{seagull}
 
-\usetheme{nasa}
+\usepackage{textpos} %position pictures
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% TITLE PAGE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Test Presentation Title Here}
+\title{Presentation Title Here}
 \subtitle{With A Subtitle Here}
 \author{Logan Halstrom}
 \institute{UCD + NASA}
 \date{\today}
 
+%ADD IMAGE TO TITLE SLIDE
+\addtobeamertemplate{title page}
+{
+%Not sure how positioning works, (-1cm,0cm for upper left corner apparently)
+\begin{textblock*}{0cm}(-0.5cm,0.5cm) %Textbox witdh, then coords
+\includegraphics[scale=0.5]{Images/EG_Logo.png}
+\end{textblock*}
+
+\begin{textblock*}{0cm}(9cm,0cm) %Textbox width, then coords
+\includegraphics[scale=0.65]{Images/Orion_SLS_trim.png}
+\end{textblock*}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% START DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{document}
 
-
-%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% MAKE TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}
 \titlepage
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% PRESENTATION OUTLINE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Section 1}
-\subsection{sub a}
-%%% OUTLINE SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+%SHOW OVERALL OUTLINE AT BEGINNING
 \begin{frame}
 \frametitle{Outline}
 \tableofcontents
 \end{frame}
 
-%%% GENERAL SLIDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%SHOW OUTLINE OF EACH SECTION AS EACH SECTION IS REACHED
+\AtBeginSection[]
+{
+\begin{frame}
+\frametitle{Outline for Section \thesection}
+\tableofcontents[currentsection]
+\end{frame}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% GENERAL SLIDES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Section 1}
+\subsection{Subsection 1a}
 
 \begin{frame}
-\frametitle{Title}
+\frametitle{Title: Section \thesection Subsection \thesubsection}
 \framesubtitle{Subitle}
 Words about stuff and stuff
 \end{frame}
 
+\subsection{Subsection 1b}
+\begin{frame}
+\frametitle{Title: Section \thesection Subsection \thesubsection}
+Test
+\end{frame}
+
+%SECTIONING DEMONSTRATION
+\section{Section 2}
+
+\subsection{Subsection 2a}
+\begin{frame}
+\frametitle{Title: Section \thesection Subsection \thesubsection}
+Test
+\end{frame}
+
+\subsection{Subsection 2b}
+\begin{frame}
+\frametitle{Title: Section \thesection Subsection \thesubsection}
+Test
+\end{frame}
 
 
 
