@@ -17,9 +17,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %USE CUSTOM STYLE FILES
-\useinnertheme{nasa}
-\useoutertheme{nasa}
-\usecolortheme{nasa}
+\ifnum\runlocal=1%
+    %.sty files located locally
+    \useinnertheme{nasa}
+    \useoutertheme{nasa}
+    \usecolortheme{nasa}
+\else%
+    %find .sty files with absolute path
+    \usepackage{\string~/lib/beamer/nasa/beamerinnerthemenasa}
+    \usepackage{\string~/lib/beamer/nasa/beamerouterthemenasa}
+    \usepackage{\string~/lib/beamer/nasa/beamercolorthemenasa}
+\fi%
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=true]

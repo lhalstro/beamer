@@ -42,10 +42,19 @@
       %NASA MEATBALL
         %node position is center of picture,
         %shift left and down by half hight, then shift down by half pad
-      \node (meatball) [anchor=east, inner sep=0,
-                        xshift=-(\picheight/2+\picheight*\pad)*0,
-                        yshift=-(\picheight/2+\picheight*\pad/2)] at (\paperwidth,0)
-        {\includegraphics[height=\picheight]{Images/NASA_Meatball.png}};
+      \ifnum\runlocal=1%
+        %Image located locally
+        \node (meatball) [anchor=east, inner sep=0,
+                          xshift=-(\picheight/2+\picheight*\pad)*0,
+                          yshift=-(\picheight/2+\picheight*\pad/2)] at (\paperwidth,0)
+          {\includegraphics[height=\picheight]{Images/NASA_Meatball.png}};
+      \else%
+        %locat image with absolute path
+        \node (meatball) [anchor=east, inner sep=0,
+                          xshift=-(\picheight/2+\picheight*\pad)*0,
+                          yshift=-(\picheight/2+\picheight*\pad/2)] at (\paperwidth,0)
+          {\includegraphics[height=\picheight]{\string~/lib/beamer/nasa/Images/NASA_Meatball.png}};
+      \fi
 
 
       % \useasboundingbox[fill=white](0,0) rectangle(\the\paperwidth,1.2);

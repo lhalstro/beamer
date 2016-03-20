@@ -1,12 +1,20 @@
-\documentclass[aspectratio=43]{beamer}
 %ASPECT RATIO:
     %4:3  --> 43
     %16:9 --> 169
+\documentclass[aspectratio=43]{beamer}
 
-%BEAMER THEME
-\usetheme{nasa}
-% \usetheme{Malmoe}
-% \usecolortheme{seagull}
+%SOURCE BEAME THEME LOCALLY OR REMOTELY
+    %0 if all .sty and image files located in same directory as .tex
+    %1 to use absolute path to reference files in another folder
+\newcommand\runlocal{1}
+\ifnum\runlocal=1%
+    %USE BEAMER THEME LOCALLY
+    \usetheme{nasa}
+\else%
+    %USE BEAMER THEME REMOTELY
+    \usepackage{\string~/lib/beamer/nasa/beamerthemenasa}
+\fi%
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% TITLE PAGE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
