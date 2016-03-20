@@ -7,71 +7,48 @@
 \definecolor{nasared}{RGB}{252, 61, 33}
 \definecolor{nasablue}{RGB}{11, 61, 145}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SLIDE BACKGROUNDS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Set background appearance for title slide and other slides
+
 \setbeamertemplate{background}{
   \begin{tikzpicture}
 
   %Total Frame
   \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
 
-  % %VERTICAL BOUNDING LINES
-  % %vertical margins
-
-  % %Top image height
-  % \newcommand\picheight{0.7cm}
-  % %percentage of total vertical padding about image
-  % \newcommand\pad{0.2}
-  % \newcommand\mytopmargin{\picheight*(1+\pad)}
-  % \newcommand\mybotmargin{0.4cm}
-  % %offset between margin lines
-  % \newcommand\offset{0.05cm}
-  % \tikz[remember picture,overlay] {%
-  %   %Draw blue line on top
-  %   \draw[nasablue] ([yshift=-\mytopmargin]current page.north west)
-  %                -- ([yshift=-\mytopmargin,xshift=\paperwidth]current page.north west);
-  %   %Draw red line just below
-  %   \draw[nasared]  ([yshift=-(\mytopmargin+\offset)]current page.north west)
-  %                -- ([yshift=-(\mytopmargin+\offset),xshift=\paperwidth]current page.north west);
-  %   %Draw blue line on bottom
-  %   \draw[nasablue] ([yshift=\mybotmargin]current page.south west)
-  %                -- ([yshift=\mybotmargin,xshift=\paperwidth]current page.south west);
-  %   %Draw red line just above
-  %   \draw[nasared]  ([yshift=(\mybotmargin+\offset)]current page.south west)
-  %                -- ([yshift=(\mybotmargin+\offset),xshift=\paperwidth]current page.south west);
-  % }
-
-  % %NASA MEATBALL
-  %   %node position is center of picture,
-  %   %shift left and down by half hight, then shift down by half pad
-  % \node (meatball) [inner sep=0,
-  %                   xshift=-(\picheight/2+\picheight*\pad),
-  %                   yshift=-(\picheight/2+\picheight*\pad/2)] at (\paperwidth,0)
-  %   {\includegraphics[height=\picheight]{Images/NASA_Meatball.png}};
-
-
-  % \fill[color=brown] (0,2) rectangle (\the\paperwidth,\the\paperheight);
-  % \fill[color=orange] (0,0) rectangle(2.95,1.9);
-  % \fill[color=blue!50!cyan!80] (3.05,0) rectangle(\the\paperwidth,1.9);
-
-  \fill[color=gray, opacity=0.25] (0,2) rectangle (\the\paperwidth,\the\paperheight);
-  \fill[color=nasared,opacity=0.75] (0,0) rectangle(2.95,1.9);
-  \fill[color=nasablue,opacity=0.75] (3.05,0) rectangle(\the\paperwidth,1.9);
-
-
-
-
-
-  \ifnum\thepage>1\relax%
-   \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+  %(relax stops the macro from continuing, does nothing else)
+  \ifnum\thepage=1\relax%
+    %TITLE PAGE BACKGROUND
+    %Big gray-ish rectangle on top, contains title, images
+      %first () is coords of bottom left corner, second () is width/height
+    \fill[color=gray, opacity=0.25] (0,0.208\paperheight) rectangle (\the\paperwidth,\the\paperheight);
+    %Bottom strip of red and blue rectangles containing author
+    \fill[color=nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,0.198\paperheight);
+    \fill[color=nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\the\paperwidth,0.198\paperheight);
+  \else
+    %BACKGROUND FOR ALL OTHER PAGES
+    %Simply a white background
+    \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
    \fi
   \end{tikzpicture}
 }
 
-% Title page
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Set text and layout for title slide
+
 \defbeamertemplate*{title page}{nasa}[1][]
 {
-   \vskip6cm%
+   \vskip0.625\paperheight%
     \begin{beamercolorbox}[wd=12cm,leftskip=3cm,sep=8pt,#1]{title page header}
+    % \begin{beamercolorbox}[wd=(0.9375*\pagewidth),leftskip=(0.234*\pagewidth)]{title page header}
       \usebeamerfont{title}\inserttitle\par%
+      \usebeamerfont{subtitle}\insertsubtitle\par%
     \end{beamercolorbox}%
     \vskip0.75cm%
     \begin{beamercolorbox}[wd=12cm,leftskip=3cm,#1]{author}
