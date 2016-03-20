@@ -79,42 +79,49 @@
 
 \setbeamertemplate{footline}{
 
-  \begin{beamercolorbox}[wd=\paperwidth,ht=\mybotmargin]{footline}
+  \ifnum\insertframenumber=1%
+    %NO FOOTER ON TITLE PAGE
+    \begin{beamercolorbox}[wd=\paperwidth,ht=\mybotmargin]{footline}
+    %EMPTY SO NO FOOTER
+    \end{beamercolorbox}
+  \else%
+    %FOOTER FOR ALL OTHER PAGES
+    \begin{beamercolorbox}[wd=\paperwidth,ht=\mybotmargin]{footline}
 
-  \begin{tikzpicture}
+    \begin{tikzpicture}
 
-    %BORDER LINES
-      %need their own overlay
-    \tikz[remember picture,overlay] {%
-      %Draw blue line on bottom
-      \draw[nasablue] ([yshift=\mybotmargin]current page.south west)
-                 -- ([yshift=\mybotmargin,xshift=\paperwidth]current page.south west);
-      %Draw red line just above
-      \draw[nasared]  ([yshift=(\mybotmargin+\offset)]current page.south west)
-                 -- ([yshift=(\mybotmargin+\offset),xshift=\paperwidth]current page.south west);
+      %BORDER LINES
+        %need their own overlay
+      \tikz[remember picture,overlay] {%
+        %Draw blue line on bottom
+        \draw[nasablue] ([yshift=\mybotmargin]current page.south west)
+                   -- ([yshift=\mybotmargin,xshift=\paperwidth]current page.south west);
+        %Draw red line just above
+        \draw[nasared]  ([yshift=(\mybotmargin+\offset)]current page.south west)
+                   -- ([yshift=(\mybotmargin+\offset),xshift=\paperwidth]current page.south west);
 
-      }
+        }
 
-    %SLIDE NUMBER
-      %vertical positioning not working*************************************
-    \node (slidenum) [anchor=east, xshift=-\mybotmargin/2, yshift=0]
-                      at (\paperwidth,-\paperheight)
-                      {\usebeamerfont{author}\insertframenumber};
+      %SLIDE NUMBER
+        %vertical positioning not working*************************************
+      \node (slidenum) [anchor=east, xshift=-\mybotmargin/2, yshift=0]
+                        at (\paperwidth,-\paperheight)
+                        {\usebeamerfont{author}\insertframenumber};
 
-    %AUTHOR'S NAME
-    \node (author) [anchor=west, xshift=\mybotmargin/2, yshift=0]
-                      at (0,-\paperheight)
-                      {\usebeamerfont{author}\insertauthor};
+      %AUTHOR'S NAME
+      \node (author) [anchor=west, xshift=\mybotmargin/2, yshift=0]
+                        at (0,-\paperheight)
+                        {\usebeamerfont{author}\insertauthor};
 
-    %DATE
-    \node (date) [anchor=center, xshift=0, yshift=0]
-                      at (\paperwidth/2,-\paperheight)
-                      {\usebeamerfont{author}\insertdate};
+      %DATE
+      \node (date) [anchor=center, xshift=0, yshift=0]
+                        at (\paperwidth/2,-\paperheight)
+                        {\usebeamerfont{author}\insertdate};
 
 
-  \end{tikzpicture}
-  \end{beamercolorbox}
-
+    \end{tikzpicture}
+    \end{beamercolorbox}
+  \fi%
 
 
 }
