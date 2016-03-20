@@ -1,14 +1,34 @@
 \mode<presentation>
 
-% Requirement
-\RequirePackage{tikz}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% IMPORT PACKAGES FOR ALL STYLE FILES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% Settings
+\RequirePackage{tikz} %make vector graphics, etc
+\RequirePackage{textpos} %position pictures
+
+%CUSTOM COLORS
+\usepackage{xcolor} %custom colors
+\definecolor{nasared}{RGB}{252, 61, 33}
+\definecolor{nasablue}{RGB}{11, 61, 145}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BEAMER SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%USE CUSTOM STYLE FILES
 \useinnertheme{nasa}
 \useoutertheme{nasa}
 \usecolortheme{nasa}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=true]
+
+%ITEMIZED LIST BULLET STYLES
+\setbeamertemplate{itemize item}[square]
+\setbeamertemplate{itemize subitem}[circle]
+\setbeamertemplate{itemize subsubitem}[triangle]
+
+% \setbeamertemplate{enumerate subitems}[i)]
 
 \mode<all>

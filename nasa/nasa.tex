@@ -3,7 +3,7 @@
 % \usetheme{Malmoe}
 % \usecolortheme{seagull}
 
-\usepackage{textpos} %position pictures
+% \usepackage{enumitem} %change style of counters in enumerated list
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% TITLE PAGE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -75,24 +75,66 @@ Words about stuff and stuff
 \end{frame}
 
 \subsection{Subsection 1b}
+
+%ENUMERATED LIST DEMO
 \begin{frame}
 \frametitle{Title: Section \thesection Subsection \thesubsection}
-Test
+Enumerated (Numbered) List Test
+\begin{enumerate}
+    \item Item 1
+    \item Item 2
+    \begin{enumerate}[i)] %label with lowercase roman numeral with right parenthesis
+        \item Subitem 1
+        \item Subitem 2
+    \end{enumerate}
+    \item Item 3
+\end{enumerate}
 \end{frame}
 
 %SECTIONING DEMONSTRATION
 \section{Section 2}
 
 \subsection{Subsection 2a}
+
+%ITEMIZED LIST DEMO
 \begin{frame}
 \frametitle{Title: Section \thesection Subsection \thesubsection}
-Test
+Itemized List Test
+\begin{itemize}
+    \item First bullet
+    \item Second bullet
+    \begin{itemize}
+        \item First subbullet
+        \begin{itemize}
+            \item First subsubbullet
+            \item Second subsubbullet
+        \end{itemize}
+        \item Second subbulet
+    \end{itemize}
+    \item Third bullet
+\end{itemize}
 \end{frame}
 
 \subsection{Subsection 2b}
+
+%TEXT BLOCK DEMO
 \begin{frame}
 \frametitle{Title: Section \thesection Subsection \thesubsection}
-Test
+\begin{block}{Block Demonstration}
+You can have a main idea as a title of the block, then discuss it as a paragraph below, with nice colors.
+\end{block}
+\begin{block}{Block List}
+    \begin{itemize}
+      \item You can also have a list in the block
+        \begin{itemize}
+          \item Overall idea with multiple options
+          \item Some other reason
+          \item Even more reasons
+        \end{itemize}
+      \item That way you can keep your list concept separate from the previous sentence concept
+      \item Hopefully, this looks more organized
+    \end{itemize}
+\end{block}
 \end{frame}
 
 
