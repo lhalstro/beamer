@@ -6,13 +6,15 @@
 %SOURCE BEAME THEME LOCALLY OR REMOTELY
     %0 if all .sty and image files located in same directory as .tex
     %1 to use absolute path to reference files in another folder
-\newcommand\runlocal{1}
+\newcommand\runlocal{0}
 \ifnum\runlocal=1%
     %USE BEAMER THEME LOCALLY
     \usetheme{nasa}
 \else%
     %USE BEAMER THEME REMOTELY
-    \usepackage{\string~/lib/beamer/nasa/beamerthemenasa}
+    %Path to remote beamer template location
+    \newcommand\remote{\string~/lib/beamer/nasa}
+    \usepackage{\remote/beamerthemenasa}
 \fi%
 
 
@@ -27,15 +29,23 @@
 \date{\today}
 
 %ADD IMAGE TO TITLE SLIDE
+%Paths to images:
+\ifnum\runlocal=1%
+    \newcommand\EGlogo{Images/EG_Logo.png}
+    \newcommand\SLSpic{Images/Orion_SLS_trim.png}
+\else%
+    \newcommand\EGlogo{\remote/Images/EG_Logo.png}
+    \newcommand\SLSpic{\remote/Images/Orion_SLS_trim.png}
+\fi%
 \addtobeamertemplate{title page}
 {
 %Not sure how positioning works, (-1cm,0cm for upper left corner apparently)
 \begin{textblock*}{0cm}(-0.5cm,0.5cm) %Textbox witdh, then coords
-\includegraphics[scale=0.5]{Images/EG_Logo.png}
+\includegraphics[scale=0.5]{\EGlogo}
 \end{textblock*}
 
 \begin{textblock*}{0cm}(9cm,0cm) %Textbox width, then coords
-\includegraphics[scale=0.65]{Images/Orion_SLS_trim.png}
+\includegraphics[scale=0.65]{\SLSpic}
 \end{textblock*}
 }
 
