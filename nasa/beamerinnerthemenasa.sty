@@ -14,6 +14,7 @@
 
   %(relax stops the macro from continuing, does nothing else)
   \ifnum\thepage=1\relax%
+    %%%%%%%%%%%%%%%%%%%%%%
     %TITLE PAGE BACKGROUND
     %Big gray-ish rectangle on top, contains title, images
       %first () is coords of bottom left corner, second () is width/height
@@ -22,10 +23,25 @@
     \fill[color=nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,0.198\paperheight);
     \fill[color=nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\the\paperwidth,0.198\paperheight);
   \else
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %BACKGROUND FOR ALL OTHER PAGES
     %Simply a white background
     \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
    \fi
+
+   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+   %ADD GRID FOR ROOM 171 MATRIX SCREENS
+    \ifnum\usegrid=1%
+    \begin{tikzpicture}
+      \draw (0, 0) -- (\paperwidth, 0);
+      \draw[thick] (0, 0.333\paperheight) -- (\paperwidth, 0.333\paperheight);
+      \draw[thick] (0, 0.667\paperheight) -- (\paperwidth, 0.667\paperheight);
+
+      \draw (0, 0) -- (0, \paperheight);
+      \draw[thick] (0.333\paperwidth, 0) -- (0.333\paperwidth, \paperheight);
+      \draw[thick] (0.667\paperwidth, 0) -- (0.667\paperwidth, \paperheight);
+    \end{tikzpicture}
+    \fi
   \end{tikzpicture}
 }
 
