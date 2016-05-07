@@ -1,7 +1,7 @@
 \mode<presentation>
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% FRAME TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% SETUP PARAMETERS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %Set frame title (header) appearance.  Include slide title on left, image on right, and frame on bottom with two lines.
@@ -9,16 +9,59 @@
 %FRAME TITLE SIZING
 %Corner Image Height (title is sized around this)
 \newcommand\picheight{0.6cm}
+% \newcommand\picheight{17}
 %percentage of total vertical padding about image
 \newcommand\pad{0.2}
 %location of first horizontal line
 \newcommand\mytopmargin{\picheight*(1+\pad)}
-%offset between margin lines
+% offset between margin lines
 \newcommand\offset{0.05cm}
+% \newcommand\offset{1.42}
 
 %location of bottomost line
 \newcommand\mybotmargin{0.4cm}
+% \newcommand\mybotmargin{11.3}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% FRAME HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifnum\filledtitle=1%
+  %%% FILLED TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\defbeamertemplate*{frametitle}{texsx}[1][]
+{
+  \begin{beamercolorbox}[wd=\paperwidth,ht=\picheight]{frametitle}
+  \begin{tikzpicture}
+  \useasboundingbox[fill=white](0,0) rectangle(\paperwidth,\picheight);
+  \fill[nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,\picheight);
+  \fill[nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\paperwidth,\picheight);
+   %ADD TITLES
+    %vertical zero to text is bottom of rectangle
+   \ifx\insertframesubtitle\@empty%
+      {\node[anchor=west, white,font=\large] at  (0.238\paperwidth,\picheight/2){\insertframetitle};}
+      \else%
+      {\node[anchor= west, white,font=\large] at (0.238\paperwidth,\picheight/1.5){\insertframetitle};%
+       \node[anchor= west, white,font=\small] at (0.238\paperwidth,-\picheight/2.5){\insertframesubtitle};}%
+      \fi
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+
+
+
+
+% \vskip0.625\paperheight%
+%     \begin{beamercolorbox}[wd=12cm,leftskip=0.24\textwidth,sep=8pt,#1]{title page header}
+%     % \begin{beamercolorbox}[wd=(0.9375*\pagewidth),leftskip=(0.234*\pagewidth)]{title page header}
+%       \usebeamerfont{title}\inserttitle\par%
+%       \usebeamerfont{subtitle}\insertsubtitle\par%
+%     \end{beamercolorbox}%
+
+
+
+
+
+\else%
 
 
 \setbeamertemplate{frametitle}{
@@ -75,6 +118,9 @@
     \end{tikzpicture}
   \end{beamercolorbox}
 }
+
+
+\fi
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
