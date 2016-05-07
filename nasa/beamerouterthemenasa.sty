@@ -26,41 +26,46 @@
 %%% FRAME HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%% FILLED TITLE OPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifnum\filledtitle=1%
-  %%% FILLED TITLE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \defbeamertemplate*{frametitle}{texsx}[1][]
 {
+  %Remove little white space at top
+  \vspace{-0.03cm}
   \begin{beamercolorbox}[wd=\paperwidth,ht=\picheight]{frametitle}
   \begin{tikzpicture}
   \useasboundingbox[fill=white](0,0) rectangle(\paperwidth,\picheight);
-  \fill[nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,\picheight);
-  \fill[nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\paperwidth,\picheight);
+  % %OFFSET CENTER BETWEEN RED AND BLU
+  % \fill[nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,\picheight);
+  % \fill[nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\paperwidth,\picheight);
+  %RED AND BLUE CENTERED
+  \fill[nasared,opacity=0.75] (0,0) rectangle(0.496\paperwidth,\picheight);
+  \fill[nasablue,opacity=0.75] (0.504\paperwidth,0) rectangle(\paperwidth,\picheight);
    %ADD TITLES
     %vertical zero to text is bottom of rectangle
    \ifx\insertframesubtitle\@empty%
-      {\node[anchor=west, white,font=\large] at  (0.238\paperwidth,\picheight/2){\insertframetitle};}
+      %INSERT FRAME SECTION AND SUBSECTION IN TOP MARGIN, IF THEY EXIST
+      \ifx\insertsubsection\@empty%
+      %Just insert section
+      {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
       \else%
-      {\node[anchor= west, white,font=\large] at (0.238\paperwidth,\picheight/1.5){\insertframetitle};%
-       \node[anchor= west, white,font=\small] at (0.238\paperwidth,-\picheight/2.5){\insertframesubtitle};}%
+      %Insert Section and Subsection
+      {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
+      {\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){\insertsubsection};}
       \fi
+      %INSERT SLIDE TITLE BELOW TOP MARGIN
+      {\node[anchor=west, black,font=\Large] at  (0,-\picheight/2){ \textbf{\insertframetitle} };}
+
+    \else%
+    %OPTION TO HAVE SUBTITLE, NOT COMPLETED YET
+    {\node[anchor= west, white,font=\large] at (0.238\paperwidth,\picheight/1.5){\insertframetitle};%
+     \node[anchor= west, white,font=\small] at (0.238\paperwidth,-\picheight/2.5){\insertframesubtitle};}%
+    \fi
   \end{tikzpicture}
   \end{beamercolorbox}
 }
 
-
-
-
-% \vskip0.625\paperheight%
-%     \begin{beamercolorbox}[wd=12cm,leftskip=0.24\textwidth,sep=8pt,#1]{title page header}
-%     % \begin{beamercolorbox}[wd=(0.9375*\pagewidth),leftskip=(0.234*\pagewidth)]{title page header}
-%       \usebeamerfont{title}\inserttitle\par%
-%       \usebeamerfont{subtitle}\insertsubtitle\par%
-%     \end{beamercolorbox}%
-
-
-
-
-
+%%% HOLLOW TITLE OPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \else%
 
 
