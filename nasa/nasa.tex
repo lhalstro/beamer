@@ -29,15 +29,17 @@
 \institute{UCD + NASA}
 \date{\today}
 
-%ADD IMAGE TO TITLE SLIDE
+%LOAD IMAGES FOR TITLE SLIDE
 %Paths to images:
 \ifnum\runlocal=1%
     \newcommand\EGlogo{Images/EG_Logo.png}
     \newcommand\SLSpic{Images/Orion_SLS_trim.png}
 \else%
     \newcommand\EGlogo{\remote/Images/EG_Logo.png}
-    \newcommand\SLSpic{\remote/Images/Orion_SLS_trim.png}
+    % \newcommand\SLSpic{\remote/Images/Orion_SLS_trim.png}
+    \newcommand\SLSpic{\remote/Images/SLS_Orange.png}
 \fi%
+%ADD IMAGES TO TITTLE SLIDE
 \addtobeamertemplate{title page}
 {
 %Not sure how positioning works, (-1cm,0cm for upper left corner apparently)
@@ -45,7 +47,10 @@
 \includegraphics[scale=0.5]{\EGlogo}
 \end{textblock*}
 
-\begin{textblock*}{0cm}(0.84\textwidth,0.25cm)
+% \begin{textblock*}{0cm}(0.84\textwidth,0.25cm)
+% \includegraphics[height=\textheight]{\SLSpic}
+% \end{textblock*}
+\begin{textblock*}{0cm}(0.7\textwidth,0.25cm)
 \includegraphics[height=\textheight]{\SLSpic}
 \end{textblock*}
 }
@@ -131,7 +136,7 @@ Itemized List Test
             \item First subsubbullet
             \item Second subsubbullet
         \end{itemize}
-        \item Second subbulet
+        \item Second subbullet
     \end{itemize}
     \item Third bullet
 \end{itemize}
