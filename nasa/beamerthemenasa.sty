@@ -9,8 +9,20 @@
 
 %CUSTOM COLORS
 \usepackage{xcolor} %custom colors
-\definecolor{nasared}{RGB}{252, 61, 33}
-\definecolor{nasablue}{RGB}{11, 61, 145}
+%check if variable for other colors exists
+\ifdefined\themecolors
+    \ifnum\themecolors=1%
+        %UC DAVIS COLORS
+        %gold
+        \definecolor{nasared}{RGB}{201, 151, 0}
+        %blue
+        \definecolor{nasablue}{RGB}{0, 40, 85}
+    \fi
+\else
+    %NASA COLORS (DEFAULT)
+    \definecolor{nasared}{RGB}{252, 61, 33}
+    \definecolor{nasablue}{RGB}{11, 61, 145}
+\fi
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEAMER SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
