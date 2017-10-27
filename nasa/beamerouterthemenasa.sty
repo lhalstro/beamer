@@ -172,10 +172,19 @@
                         at (0,-\paperheight)
                         {\usebeamerfont{author}\insertauthor};
 
-      %DATE
+      %DATE (OR USER SPECIFIED TEXT)
+      \ifnum\newfootercenter=1%
+        %use provided value for footercenter as center footer text
+      \else%
+        %use date for center footer text
+        \renewcommand\footercenter{\insertdate}
+      \fi
+      % \node (date) [anchor=center, xshift=0, yshift=0]
+      %                   at (\paperwidth/2,-\paperheight)
+      %                   {\usebeamerfont{author}\insertdate};
       \node (date) [anchor=center, xshift=0, yshift=0]
                         at (\paperwidth/2,-\paperheight)
-                        {\usebeamerfont{author}\insertdate};
+                        {\usebeamerfont{author}\footercenter};
 
 
     \end{tikzpicture}
