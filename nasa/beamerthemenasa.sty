@@ -55,4 +55,30 @@
 
 % \setbeamertemplate{enumerate subitems}[i)]
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% BIBILIOGRAPHY SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%make bibliography entries numbered instead of dumb icon picture
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+
+\newcommand\mybibfont{\footnotesize} %bibliography font size
+\newcommand\mybibcolor{black}        %bibliography font color
+%change all bib font sizes
+\setbeamerfont{bibliography item}{size=\mybibfont}
+\setbeamerfont{bibliography entry author}{size=\mybibfont}
+\setbeamerfont{bibliography entry title}{size=\mybibfont}
+\setbeamerfont{bibliography entry location}{size=\mybibfont}
+\setbeamerfont{bibliography entry note}{size=\mybibfont}
+%change all bib font colors
+\setbeamercolor{bibliography item}{fg=\mybibcolor}
+\setbeamercolor{bibliography entry author}{fg=\mybibcolor}
+\setbeamercolor{bibliography entry title}{fg=\mybibcolor}
+\setbeamercolor{bibliography entry location}{fg=\mybibcolor}
+\setbeamercolor{bibliography entry note}{fg=\mybibcolor}
+
+
+
+
 \mode<all>
