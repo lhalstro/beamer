@@ -1,6 +1,11 @@
 %ASPECT RATIO:
     %4:3  --> 43
     %16:9 --> 169
+
+%HANDOUT MODE
+    %1. Put \begin{frame}<handout:0> on a slide you don't want in handout
+    %2. Add 'handout' to document class options (after aspectratio)
+
 \documentclass[aspectratio=169]{beamer}
 
 %SOURCE BEAME THEME LOCALLY OR REMOTELY
@@ -21,6 +26,13 @@
     \newcommand\remote{\string~/lib/beamer/nasa}
     \usepackage{\remote/beamerthemenasa}
 \fi%
+
+
+
+
+
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% TITLE PAGE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -95,9 +107,23 @@
 %%% GENERAL SLIDES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Section 1}\label{Sec1}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Subsection 1a}\label{Sub1a}
 
+
+
+%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Title: Section \thesection Subsection \thesubsection}
 \framesubtitle{Subitle}
@@ -107,8 +133,8 @@ Words about stuff and stuff
 \subsection{Subsection 1b}
 
 %ENUMERATED LIST DEMO
-\begin{frame}
-\frametitle{Title: Section \thesection Subsection \thesubsection}
+\begin{frame} \frametitle{Title: Section \thesection Subsection \thesubsection}
+
 Enumerated (Numbered) List Test
 \begin{enumerate}
     \item Item 1
@@ -121,9 +147,11 @@ Enumerated (Numbered) List Test
 \end{enumerate}
 \end{frame}
 
-%SECTIONING DEMONSTRATION
-\section{Section 2}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Section 2} %SECTIONING DEMONSTRATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Subsection 2a}
 
 %ITEMIZED LIST DEMO
@@ -145,6 +173,8 @@ Itemized List Test
 \end{itemize}
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Subsection 2b}
 
 %TEXT BLOCK DEMO
@@ -182,6 +212,49 @@ You can have a main idea as a title of the block, then discuss it as a paragraph
   \end{center}
 \end{columns}
 \end{frame}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section*{Backup} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%* makes backup not appear in table of contents
+
+
+\begin{frame}\frametitle{Backup}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{Backup Section Name}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection*{References}
+
+\begin{frame}\frametitle{Example Citations}
+\cite{knacke1968apollo}
+\cite{mckinney2013boeing}
+\cite{adams2009mars}
+\cite{ray2015pendulum}
+\cite{ali2017orion}
+\cite{anderson2017subscale}
+
+\end{frame}
+
+
+\begin{frame}[allowframebreaks]\frametitle{References}
+%list all references cited with "\cite"
+%'allowframebreaks' splits content over multiple slides
+        \bibliographystyle{ieeetr} %style of references
+        \bibliography{nasa}        %source .bib file
+\end{frame}
+
 
 
 
