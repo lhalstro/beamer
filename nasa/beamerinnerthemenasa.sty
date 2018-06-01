@@ -30,7 +30,7 @@
    \fi
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-   %ADD GRID FOR ROOM 171 MATRIX SCREENS
+   %ADD GRID FOR JSC BUILDING 16 ROOM 171 MATRIX SCREENS
     \ifnum\usegrid=1%
     \begin{tikzpicture}
       \draw (0, 0) -- (\paperwidth, 0);
@@ -53,17 +53,28 @@
 
 \defbeamertemplate*{title page}{nasa}[1][]
 {
-   \vskip0.625\paperheight%
-    \begin{beamercolorbox}[wd=12cm,leftskip=0.24\textwidth,sep=8pt,#1]{title page header}
+    %TEXT BOX FOR TITLE AND SUBTITLE
+      %vskip: distance of title from closest above item (top of page for title)
+      %wd: width of textbox
+      %ht: starting height of textbox from top
+      %leftskip: left alignment of box?
+      %sep: line spacing?
+      %#1: ?
+    % \vskip0.625\paperheight%
+    \begin{beamercolorbox}[wd=\titletextwidth,ht=\titleheightfrac\paperheight,leftskip=\titleleftalign,sep=8pt,#1]{title page header}
     % \begin{beamercolorbox}[wd=(0.9375*\pagewidth),leftskip=(0.234*\pagewidth)]{title page header}
       \usebeamerfont{title}\inserttitle\par%
       \usebeamerfont{subtitle}\insertsubtitle\par%
     \end{beamercolorbox}%
+    %TEXTBOX FOR AUTHOR
     % \vskip0.75cm%
-    \vskip0.065\paperheight%
-    \begin{beamercolorbox}[wd=12cm,leftskip=0.2675\textwidth,#1]{author}
+    % \vskip0.065\paperheight%
+    \FPeval{authorheightfrac}{0.85-\titleheightfrac} %get author height to be constant
+    % 0.065
+    \begin{beamercolorbox}[wd=12cm,ht=\authorheightfrac\paperheight,leftskip=0.2675\textwidth,#1]{author}
       \usebeamerfont{author}\insertauthor%
     \end{beamercolorbox}
+    %TEXTBOX FOR DATE
      % \vskip0.2cm%
      \vskip0.015\paperheight
     \begin{beamercolorbox}[wd=12cm,leftskip=0.2675\textwidth,#1]{date}
