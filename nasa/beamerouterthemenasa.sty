@@ -163,9 +163,18 @@
 
       %SLIDE NUMBER
         %vertical positioning not working*************************************
+
+      \ifnum\totframesinfoot=1%
+        %footer reads "current #/total #"
+        \newcommand\framenumbertext{\insertframenumber/\inserttotalframenumber}
+      \else%
+        %footer reads "current #"
+        \newcommand\framenumbertext{\insertframenumber}
+      \fi
+
       \node (slidenum) [anchor=east, xshift=-\mybotmargin/2, yshift=0]
                         at (\paperwidth,-\paperheight)
-                        {\usebeamerfont{author}\insertframenumber};
+                        {\usebeamerfont{author}\framenumbertext};
 
       %AUTHOR'S NAME
       \node (author) [anchor=west, xshift=\mybotmargin/2, yshift=0]

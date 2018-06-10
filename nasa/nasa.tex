@@ -17,6 +17,7 @@
 \newcommand\themecolors{0}    %optional: 1 = ucd colors
 \newcommand\newfootercenter{0} %center footer text: 0=date, 1=footercenter text
 \newcommand\footercenter{new center footer text rather than date}
+\newcommand\totframesinfoot{0} % 1: total number of frames in footer
 \newcommand\titletextwidth{12cm} %width of title text (default 12cm)
 \newcommand\titleleftalignfrac{0.24} %left alignment of title textbox as fraction of textwidth (default 0.24)
 \newcommand\titleheightfrac{0.775} %fraction hight of title (base?) from top (default 0.775)
@@ -220,7 +221,8 @@ You can have a main idea as a title of the block, then discuss it as a paragraph
 
 
 
-
+%CALL THIS AT BEGINNING OF BACKUP SLIDES TO EXCLUDE FROM TOTAL COUNT
+\backupbegin
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section*{Backup} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -259,7 +261,8 @@ You can have a main idea as a title of the block, then discuss it as a paragraph
 \end{frame}
 
 
-
+%CALL THIS AT END OF BACKUP TO COUNT SLIDES AGAIN
+\backupend
 
 
 \end{document}

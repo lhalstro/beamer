@@ -79,7 +79,19 @@
 \setbeamercolor{bibliography entry location}{fg=\mybibcolor}
 \setbeamercolor{bibliography entry note}{fg=\mybibcolor}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% FUNCTIONS TO EXCLUDE BACKUP SLIDES FROM TOTAL SLIDE COUNT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%CALL THIS AT BEGINNING OF BACKUP SLIDES TO EXCLUDE FROM TOTAL COUNT
+\newcommand{\backupbegin}{
+   \newcounter{finalframe}
+   \setcounter{finalframe}{\value{framenumber}}
+}
+%CALL THIS AT END OF BACKUP TO COUNT SLIDES AGAIN
+\newcommand{\backupend}{
+   \setcounter{framenumber}{\value{finalframe}}
+}
 
 
 \mode<all>
