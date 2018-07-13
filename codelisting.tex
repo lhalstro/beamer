@@ -3,8 +3,9 @@
 %Source code listings from files and present them using Sublime Text
 %syntax coloring.
 
-%Call listing package in separate beamer.tex with:
-    %\input{\string~/lib/beamer/codelisting}
+%CALL LISTING PACKAGE IN SEPARATE BEAMER.TEX WITH:
+%\newcommand\whiteback{0} %code listing background color (0: black, 1: white)
+%\input{\string~/lib/beamer/codelisting}
 
 
 \usepackage{color}     %make custom colors for syntax coloring
@@ -34,7 +35,7 @@
 
 
 %White or Black background toggle
-\newcommand\whiteback{0}
+% \newcommand\whiteback{0}
 \ifnum\whiteback=1%
   %White Background
   \newcommand\backclr{white}
