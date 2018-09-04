@@ -6,27 +6,55 @@
 
 %Set background appearance for title slide and other slides
 
+\newcommand\customtitlebackground{
+  %%%%%%%%%%%%%%%%%%%%%%
+  %TITLE PAGE BACKGROUND
+  %Big gray-ish rectangle on top, contains title, images
+    %first () is coords of bottom left corner, second () is width/height
+  \fill[color=gray, opacity=0.25] (0,0.208\paperheight) rectangle (\the\paperwidth,\the\paperheight);
+  %Bottom strip of red and blue rectangles containing author
+  \fill[color=nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,0.198\paperheight);
+  \fill[color=nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\the\paperwidth,0.198\paperheight);
+}
+
+\newcommand\customstandardbackground{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %BACKGROUND FOR ALL OTHER PAGES
+    %Simply a white background
+    \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+}
+
+%SET BACKGROUND FOR EACH SLIDE
 \setbeamertemplate{background}{
   \begin{tikzpicture}
 
   %Total Frame
   \useasboundingbox (0,0) rectangle(\the\paperwidth,\the\paperheight);
 
+  % %option to have slide before title (e.g. SBU)
+  % \ifnum\slidebeforetitle=1%
+  %   %(relax stops the macro from continuing, does nothing else)
+  %   \ifnum\thepage=1\relax%
+
+
+
   %(relax stops the macro from continuing, does nothing else)
   \ifnum\thepage=1\relax%
-    %%%%%%%%%%%%%%%%%%%%%%
-    %TITLE PAGE BACKGROUND
-    %Big gray-ish rectangle on top, contains title, images
-      %first () is coords of bottom left corner, second () is width/height
-    \fill[color=gray, opacity=0.25] (0,0.208\paperheight) rectangle (\the\paperwidth,\the\paperheight);
-    %Bottom strip of red and blue rectangles containing author
-    \fill[color=nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,0.198\paperheight);
-    \fill[color=nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\the\paperwidth,0.198\paperheight);
+    % %%%%%%%%%%%%%%%%%%%%%%
+    % %TITLE PAGE BACKGROUND
+    % %Big gray-ish rectangle on top, contains title, images
+    %   %first () is coords of bottom left corner, second () is width/height
+    % \fill[color=gray, opacity=0.25] (0,0.208\paperheight) rectangle (\the\paperwidth,\the\paperheight);
+    % %Bottom strip of red and blue rectangles containing author
+    % \fill[color=nasared,opacity=0.75] (0,0) rectangle(0.23\paperwidth,0.198\paperheight);
+    % \fill[color=nasablue,opacity=0.75] (0.238\paperwidth,0) rectangle(\the\paperwidth,0.198\paperheight);
+    \customtitlebackground
   \else
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %BACKGROUND FOR ALL OTHER PAGES
-    %Simply a white background
-    \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % %BACKGROUND FOR ALL OTHER PAGES
+    % %Simply a white background
+    % \fill[white,opacity=1] (0,0) rectangle(\the\paperwidth,\the\paperheight);
+    \customstandardbackground
    \fi
 
    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
