@@ -45,18 +45,6 @@
   % \else
   % %NORMAL BACKGROUND OPTIONS
 
-
-  %Page number where title background is applied
-  \ifnum\slidebeforetitle=1%
-      %TITLE ON SECOND PAGE
-        %option to have slide before title (e.g. SBU)
-      \newcommand\titlepagenum{2}
-  \else
-      %TITLE ON FIRST PAGE
-      \newcommand\titlepagenum{1}
-  \fi
-
-
   %(relax stops the macro from continuing, does nothing else)
   \ifnum\thepage=\titlepagenum\relax%
     % %%%%%%%%%%%%%%%%%%%%%%

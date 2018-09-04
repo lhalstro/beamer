@@ -137,8 +137,9 @@
 %Set frame footer appearance.  Include author on left, date in middle, and slide number on right. Frame on top with two lines.
 
 \setbeamertemplate{footline}{
-
   \ifnum\insertframenumber=1%
+  % \FPeval{\titlepagenumplusone}{\titlepagenum+1}
+  % \ifnum\insertframenumber<\titlepagenumplusone%
     %NO FOOTER ON TITLE PAGE
     \begin{beamercolorbox}[wd=\paperwidth,ht=\mybotmargin]{footline}
       %EMPTY SO NO FOOTER

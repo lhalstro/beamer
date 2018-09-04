@@ -29,6 +29,22 @@
     \definecolor{nasablue}{RGB}{11, 61, 145}
 \fi
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% OTHER CUSTOM SETTINGS TO SOURCE BY STY %%%%%%%%%%%%%%%%%%%%%%%%%%%%&
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%PAGE NUMBER WHERE TITLE SLIDE FORMATTING IS APPLIED
+\ifnum\slidebeforetitle=1%
+  %TITLE ON SECOND PAGE
+    %option to have slide before title (e.g. SBU)
+  \newcommand\titlepagenum{2}
+\else
+  %TITLE ON FIRST PAGE
+  \newcommand\titlepagenum{1}
+\fi
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEAMER SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
