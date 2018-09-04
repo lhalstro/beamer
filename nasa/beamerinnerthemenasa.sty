@@ -34,12 +34,31 @@
   % %option to have slide before title (e.g. SBU)
   % \ifnum\slidebeforetitle=1%
   %   %(relax stops the macro from continuing, does nothing else)
-  %   \ifnum\thepage=1\relax%
+  %   \ifnum\thepage=2\relax%
+  %     %title page is the second page (not first like default)
+  %     \customtitlebackground
+  %   \else
+  %     %first and 3rd pages on are normal background
+  %     \customstandardbackground
+  %   \fi
 
+  % \else
+  % %NORMAL BACKGROUND OPTIONS
+
+
+  %Page number where title background is applied
+  \ifnum\slidebeforetitle=1%
+      %TITLE ON SECOND PAGE
+        %option to have slide before title (e.g. SBU)
+      \newcommand\titlepagenum{2}
+  \else
+      %TITLE ON FIRST PAGE
+      \newcommand\titlepagenum{1}
+  \fi
 
 
   %(relax stops the macro from continuing, does nothing else)
-  \ifnum\thepage=1\relax%
+  \ifnum\thepage=\titlepagenum\relax%
     % %%%%%%%%%%%%%%%%%%%%%%
     % %TITLE PAGE BACKGROUND
     % %Big gray-ish rectangle on top, contains title, images
