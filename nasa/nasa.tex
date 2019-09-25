@@ -85,6 +85,18 @@
 %%% MAKE TITLE PAGE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%%% OPTION FOR PAGE BEFORE TITLE (E.G. SBU NOTICE, ETC)
+\ifnum\slidebeforetitle=1
+  \vspace{-0.1in}
+  \begin{frame}
+  \begin{columns}
+  \column{1.15\textwidth}
+  \includegraphics[width=1.0\textwidth,page=1]{Images/pre-titleslide.pdf}
+  \end{columns}
+  \end{frame}
+\fi
+
+%STANDARD TITLE PAGE
 \begin{frame}
 \titlepage
 \end{frame}
