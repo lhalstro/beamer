@@ -68,10 +68,60 @@
 % \addtobeamertemplate{frametitle}{}{\vspace*{0.5cm}}
 \addtobeamertemplate{frametitle}{}{\vspace*{0.1cm}}
 
+
+
+
 %%% HOLLOW TITLE OPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %like oldschool basic nasa template
 \else%
 
+
+
+%%% 2020 FILLED TITLE OPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\ifnum\filledtitle=2%
+\defbeamertemplate*{frametitle}{texsx}[1][]
+{
+
+  \renewcommand\picheight{0.75cm}
+  %Remove little white space at top
+  \vspace{-0.03cm}
+  \begin{beamercolorbox}[wd=\paperwidth, ht=\picheight]{frametitle}
+  \begin{tikzpicture}
+
+
+    %this box holds everything in place, you need it
+    \useasboundingbox[fill=white](0,0) rectangle(\paperwidth,\picheight);
+
+  %RED AND BLUE OFFCENTER
+  \fill[nasared,opacity=0.75] (0,0) rectangle(0.694\paperwidth,\picheight); %left color bar
+  \fill[nasablue,opacity=0.75] (0.706\paperwidth,0) rectangle(\paperwidth,\picheight); %right color bar
+   %ADD TITLES
+    %vertical zero to text is bottom of rectangle
+
+    %INSERT SLIDE TITLE IN LEFT TOP MARGIN
+    {\node[anchor=west, offwhite,font=\LARGE] at  (0,\picheight/2){ \textbf{\insertframetitle} };}
+
+
+    %INSERT FRAME SECTION AND SUBSECTION IN RIGHT TOP MARGIN, IF THEY EXIST
+    \ifx\insertsubsection\@empty%
+    %Just insert section
+    {\node[anchor=north west, offwhite, font=\footnotesize , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
+    \else%
+    %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
+    {\node[anchor=north west, offwhite, font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
+    {\node[anchor=north west, white,    font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
+    \fi
+
+  \end{tikzpicture}
+  \end{beamercolorbox}
+}
+%REDUCE SPACING BETWEEN TITLE BAR AND BODY
+\addtobeamertemplate{frametitle}{}{\vspace*{-0.1in}}
+
+
+%%% HOLLOW TITLE OPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%like oldschool basic nasa template
+\else%
 
 \setbeamertemplate{frametitle}{
   %Box containing title (really just contains picture not lines)
