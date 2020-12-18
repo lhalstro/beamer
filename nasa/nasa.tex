@@ -26,9 +26,9 @@
 \newcommand\filledtitle{2} %0: oldschool nasa template with frametitle in line with meatball, 2: sec/subsec above title filled
 \newcommand\themecolors{0}    %optional: 1 = ucd colors, other = nasa colors
 \newcommand\newfootercenter{0} %center footer text: 0=date, 1=footercenter text
-\newcommand\footercenter{new center footer text rather than date} %use this for SBU message
-% \newcommand\newfooterleft{0} %left footer text: 0=Author (Institute), 1=leftcenter text
-% \newcommand\footerleft{new left footer text rather than author/institute}
+\newcommand\footercenter{new center footer text rather than short title} %use this for SBU message
+\newcommand\newfooterleft{0} %left footer text: 0=Author (Institute), 1=leftcenter text
+\newcommand\footerleft{new left footer text rather than author/institute}
 \newcommand\slidebeforetitle{0} %Title on first slide: 0. (1: have the title on the second slide (e.g. SBU first))
 \newcommand\totframesinfoot{0} % 1: total number of frames in footer
 \newcommand\titletextwidth{12cm} %width of title text (default 12cm)
@@ -102,10 +102,12 @@
 %%% TITLE PAGE INFO %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%title, author, institute have the option for an additional [short title] that will be displayed in the footer
+  %default short title is title
 \title[Short Title]{Presentation Title Here}
 \subtitle{With A Subtitle Here}
 \author{Logan Halstrom}
-\institute{UCD + NASA}
+\institute{NASA}
 \date{\today}
 
 %LOAD IMAGES FOR TITLE SLIDE

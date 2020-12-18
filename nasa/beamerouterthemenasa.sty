@@ -212,7 +212,7 @@
 
         }
 
-      %SLIDE NUMBER
+      %RIGHT FOOTER: SLIDE NUMBER AND DATE
         %vertical positioning not working*************************************
 
       \ifnum\totframesinfoot=1%
@@ -227,17 +227,41 @@
                         at (\paperwidth,-\paperheight)
                         {\usebeamerfont{author}\framenumbertext};
 
-      %AUTHOR'S NAME
+      \node (date) [anchor=east, xshift=-\mybotmargin/0.5, yshift=0]
+                        at (slidenum)
+                        {\usebeamerfont{author}\insertdate};
+
+      %LEFT FOOTER: AUTHOR'S NAME - INSTITUTE (OR USER SPECIFIED TEXT)
+      \ifnum\newfooterleft=1%
+        %use user-provided left footer text
+      \else%
+        \ifx\beamer@shortauthor\@empty%
+          \ifx\insertinstitute\@empty%
+            %No author or institute for left
+            \renewcommand\footerleft{}
+          \else%
+            %If author NOT defined AND institute is defined, we don't need the seperator text
+            \renewcommand\footerleft{\usebeamerfont{author} \insertshortinstitute}
+          \fi
+        \else
+          \ifx\insertinstitute\@empty%
+            \renewcommand\footerleft{\usebeamerfont{author}\insertshortauthor}
+          \else%
+            \renewcommand\footerleft{\usebeamerfont{author}\insertshortauthor ~ \textendash ~ \insertshortinstitute}
+          \fi
+        \fi
+        % \renewcommand\footerleft{\usebeamerfont{author}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{\beamer@ifempty\expandafter{\beamer@shortauthor}{}{~ \textendash ~ }  \insertshortinstitute} }
+      \fi
       \node (author) [anchor=west, xshift=\mybotmargin/2, yshift=0]
                         at (0,-\paperheight)
-                        {\usebeamerfont{author}\insertauthor};
+                        {\footerleft };
 
-      %DATE (OR USER SPECIFIED TEXT)
+      %CENTER FOOTER: SHORT TITLE (OR USER SPECIFIED TEXT)
       \ifnum\newfootercenter=1%
         %use provided value for footercenter as center footer text
       \else%
         %use date for center footer text
-        \renewcommand\footercenter{\insertdate}
+        \renewcommand\footercenter{\insertshorttitle}
       \fi
       % \node (date) [anchor=center, xshift=0, yshift=0]
       %                   at (\paperwidth/2,-\paperheight)
