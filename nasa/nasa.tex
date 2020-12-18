@@ -1,20 +1,30 @@
+%TEMPLATE FOR BEAMER PRESENTATIONS WITH CUSTOM THEME
+
+%TIPS AND TRICKS:
+
 %ASPECT RATIO:
     %4:3  --> 43
     %16:9 --> 169
 
 %HANDOUT MODE
-    %1. Put \begin{frame}<handout:0> on a slide you don't want in handout
-    %2. Add 'handout' to document class options (after aspectratio)
+    %1. Add 'handout' to document class options (after aspectratio)
+    %2. Put \begin{frame}<handout:0> on a slide you don't want in handout
+    %3. For reveals (\only), use '<#|handout:0>', # is the order of the reveal
+    %4. For in handout only (e.g. picture in handout, video in presentation),
+    %       use: '\only<beamer:0>{command}' (e.g. "dont show up in beamer")
 
-\documentclass[aspectratio=169]{beamer}
+    \documentclass[aspectratio=169, t]{beamer} %frames only
+    % \documentclass[aspectratio=169, t, handout]{beamer} %handout version
+    % \documentclass[aspectratio=169, t, notes]{beamer}       %frames + notes
+    % \documentclass[aspectratio=169, t, notes=only]{beamer}   %only notes
 
-%SOURCE BEAME THEME LOCALLY OR REMOTELY
+%SOURCE BEAMER THEME LOCALLY OR REMOTELY
     %0 if all .sty and image files located in same directory as .tex
     %1 to use absolute path to reference files in another folder
-\newcommand\runlocal{0}
-\newcommand\usegrid{1}
-\newcommand\filledtitle{1}
-\newcommand\themecolors{0}    %optional: 1 = ucd colors
+\newcommand\runlocal{0} %source of beamer theme
+\newcommand\usegrid{1} %put 3x3 grid over each slide mimicing matrix display
+\newcommand\filledtitle{1} %0: oldschool nasa template with frametitle in line with meatball, 2: sec/subsec above title filled
+\newcommand\themecolors{0}    %optional: 1 = ucd colors, other = nasa colors
 \newcommand\newfootercenter{0} %center footer text: 0=date, 1=footercenter text
 \newcommand\footercenter{new center footer text rather than date}
 \newcommand\slidebeforetitle{0} %Title on first slide: 0. (1: have the title on the second slide (e.g. SBU first))
@@ -31,6 +41,53 @@
     \newcommand\remote{\string~/lib/beamer/nasa}
     \usepackage{\remote/beamerthemenasa}
 \fi%
+
+%CUSTOM BEAMER TEMPLATE FORMATTING
+\usepackage{caption}  %caption graphics w/o figure environment with '\captionof*{figure}{text}' ('*' omits 'Figure')
+% \setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\setbeamersize{text margin left=0.25in, text margin right=0.25in} %slide margins
+
+%OTHER PACKAGES
+%Graphics
+\usepackage{rotate}           %rotate/mirror images
+\usepackage[export]{adjustbox} %allow trimming pictures by relative amounts (with 'adjincludegraphics')
+%Math
+\usepackage{amsmath}          % for formula writing (i.e. 'split', etc)
+\usepackage{bbding}           %get \checkmark symbol
+\usepackage{cancel}           %"goes to zero" arrow \cancelto{0}{x}
+\usepackage{xfrac}            %allows slated and side fractions
+% %Movies
+% \usepackage{media9}         %embed flash multimedia, won't work after 2020
+% % \usepackage{multimedia}       %allows embedded movies REMOVED TO AVOID CONFLICT WITH MEDIA9
+% % \usepackage{movie15}          %play un-embedded movies with external player
+% \usepackage{animate}          %animate series of stills like a gif
+% \usepackage{graphicx}         %allows saving movies (???)
+% %Formatting
+% \usepackage{framed}           %allows shaded text
+% \usepackage{soul}             %text highlighting
+% \usepackage{markdown} %use markdown syntax with \begin{markdown}
+% \markdownSetup{
+%   renderers = {
+%     link     = {#1},        % Render a link as the link label.
+%     emphasis = {\emph{#1}}, % Render emphasis using `\emph`.
+%   }
+% }
+
+% %TIKZ
+% \usepackage{tikz}             %for creating vector graphics diagrams
+% \usetikzlibrary{backgrounds}  %put backgrounds behind tikz figures
+% \usetikzlibrary{calc}         %perform calculations within $$
+% \usetikzlibrary{positioning}  %position tikz elements
+% \usetikzlibrary{angles}       %label angles between lines with arcs
+% \usetikzlibrary{quotes}       %Put angle label in quotes
+% \usetikzlibrary{shapes}       %all of the shapes
+% \usetikzlibrary{arrows}       %arrow styles
+% \usetikzlibrary{fit}          %fit nodes in boxes
+% \usetikzlibrary{patterns}     %allow cross hatching
+
+% \usepackage[beamer, customcolors]{hf-tikz}%for boxed equations
+% \usepackage[mode=buildnew]{standalone}% requires -shell-escape
+%   % compile with `pdflatex -shell-escape main` or `xelatex  -shell-escape main`
 
 
 
@@ -106,20 +163,35 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %SHOW OVERALL OUTLINE AT BEGINNING
-\begin{frame}
-\frametitle{Outline}
+%Use * to leave sections out of overview (e.g. \section*{Backup})
+\begin{frame}\frametitle{Outline}
 \tableofcontents
 \end{frame}
 
 %SHOW OUTLINE OF EACH SECTION AS EACH SECTION IS REACHED
 \AtBeginSection[]
 {
-\begin{frame}
-\frametitle{Outline for Section \thesection}
-\tableofcontents[currentsection]
-\end{frame}
+  \ifnum \thesection>1 %don't have outine before first sect (redundant)
+  \begin{frame}
+  \frametitle{Outline for Section \thesection}
+  \tableofcontents[currentsection] %show sections and subsections
+  % \tableofcontents[currentsection, hideallsubsections] %only show sections
+  \end{frame}
+\else
+\fi
 }
 
+% %SHOW OUTLINE OF EACH SUBSECTION AS EACH SUBSECTION IS REACHED
+% \AtBeginSubsection[]
+% {
+% \ifnum \thesubsection>1 %don't have outine before first sect (redundant)
+%   \begin{frame}
+%   \frametitle{Outline for Section \thesection.\thesubsection}
+%   \tableofcontents[currentsubsection]
+%   \end{frame}
+% \else
+% \fi
+% }
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% GENERAL SLIDES %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -127,54 +199,48 @@
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
 \section{Section 1}\label{Sec1}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
 
 
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
 \subsection{Subsection 1a}\label{Sub1a}
 
 
 
-%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Title: Section \thesection Subsection \thesubsection}
-\framesubtitle{Subitle}
-Words about stuff and stuff
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{Title: Section \thesection Subsection \thesubsection}
+% \framesubtitle{Subtitle}
+Demonstrates sections and subsections
 \end{frame}
 
+%===============================================================================
 \subsection{Subsection 1b}
 
-%ENUMERATED LIST DEMO
-\begin{frame} \frametitle{Title: Section \thesection Subsection \thesubsection}
-
-Enumerated (Numbered) List Test
-\begin{enumerate}
-    \item Item 1
-    \item Item 2
-    \begin{enumerate}[i)] %label with lowercase roman numeral with right parenthesis
-        \item Subitem 1
-        \item Subitem 2
-    \end{enumerate}
-    \item Item 3
-\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{Title: Section \thesection Subsection \thesubsection}
+  Demonstrates sections and subsections again
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Section 2} %SECTIONING DEMONSTRATION
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
+\section{Example Slides}
+%===============================================================================
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Subsection 2a}
 
+
+%===============================================================================
+\subsection{Lists}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{Itemized Lists}
 %ITEMIZED LIST DEMO
-\begin{frame}
-\frametitle{Title: Section \thesection Subsection \thesubsection}
-Itemized List Test
+
+List Title
 \begin{itemize}
     \item First bullet
     \item Second bullet
@@ -191,15 +257,48 @@ Itemized List Test
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Subsection 2b}
 
-%TEXT BLOCK DEMO
-\begin{frame}
-\frametitle{Title: Section \thesection Subsection \thesubsection}
-\begin{block}{Block Demonstration}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame} \frametitle{Enumerated Lists}
+  %ENUMERATED LIST DEMO
+
+  Enumerated (Numbered) List Test
+  \begin{enumerate}
+      \item Item 1
+      \item Item 2
+      \begin{enumerate}[i)] %label with lowercase roman numeral with right parenthesis
+          \item Subitem 1
+          \item Subitem 2
+      \end{enumerate}
+      \item Item 3
+  \end{enumerate}
+  \end{frame}
+
+
+%===============================================================================
+\subsection{Block Text}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{Block Demo}
+  %TEXT BLOCK DEMO
+  %-------------------------------------
+  %   title                             |
+  %                                     |
+  %      ________________________       |
+  %     | text block             |      |
+  %     |________________________|      |
+  %                                     |
+  %      ________________________       |
+  %     | text block             |      |
+  %     |________________________|      |
+  %-------------------------------------
+
+  \begin{block}{Block Demonstration}
 You can have a main idea as a title of the block, then discuss it as a paragraph below, with nice colors.
 \end{block}
+
+
 \begin{block}{Block List}
     \begin{itemize}
       \item You can also have a list in the block
@@ -214,14 +313,22 @@ You can have a main idea as a title of the block, then discuss it as a paragraph
 \end{block}
 \end{frame}
 
-\begin{frame}
-\frametitle{Pictures In Columns}
-\begin{columns}
+
+
+%===============================================================================
+\subsection{Pictures}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{Pictures In Columns}
+
+\begin{columns}[b]
 \column{0.5\textwidth}
   \begin{center}
     Title text for Pic 1
     \includegraphics[width=\textwidth]{Images/Orion_logo.png}
   \end{center}
+
 \column{0.5\textwidth}
   \begin{center}
     Title text for Pic 2
@@ -232,29 +339,155 @@ You can have a main idea as a title of the block, then discuss it as a paragraph
 
 
 
+  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  \begin{frame}\frametitle{Pictures Above Text Block}
+    % \vspace{-0.475in}
+
+    %-------------------------------------
+    %   title                             |
+    %       ______         ______         |
+    %      |      |       |      |        |
+    %      |  pic |       |  pic |        |
+    %      |______|       |______|        |
+    %      ________________________       |
+    %     | text block             |      |
+    %     |________________________|      |
+    %-------------------------------------
+
+    \begin{columns}[b]
+
+
+    \column{0.5\textwidth}
+
+    % \vspace{-0.25in}
+    \begin{center}
+      %[trim=left bottom right top, clip]
+      \includegraphics[trim=0 0 0 0, clip, width=1.0\textwidth]{Images/Orion_logo.png}
+      \captionof*{figure}{ Caption for Figure 1 }
+      \end{center}
+
+
+    \column{0.5\textwidth}
+
+    % \vspace{-0.25in}
+
+
+    \begin{center}
+      \includegraphics[trim=0 0 0 0, clip, width=1.0\textwidth]{Images/NASA_Meatball.png}
+      \vspace{-1.2cm}
+      \captionof{figure}{ Caption for Figure 2 }
+
+    \end{center}
+
+
+    \end{columns}
+
+
+  % \vspace{-0.1in}
+
+
+
+    \begin{block}{}
+      \begin{itemize}
+        \item Descriptive text about pictures
+      \end{itemize}
+    \end{block}
+
+    \end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}\frametitle{2 Column: Left Picture, Right Text Blocks}
+  % \vspace{-0.475in}
+
+  %-------------------------------------
+  %   title                             |
+  %                    ________         |
+  %                   | text   |        |
+  %       ______      |  block |        |
+  %      |      |     |________|        |
+  %      |  pic |      ________         |
+  %      |______|     | text   |        |
+  %                   |  block |        |
+  %                   |________|        |
+  %-------------------------------------
+
+
+
+  \begin{columns}[t]
+
+
+  \column{0.5\textwidth}
+
+  % \vspace{-0.25in}
+  \begin{center}
+    %[trim=left bottom right top, clip]
+    \includegraphics[trim=0 0 0 0, clip, width=1.0\textwidth]{Images/Orion_logo.png}
+    \vspace{-0.5cm}
+    \captionof*{figure}{ Caption for Figure 2 }
+    \end{center}
+
+
+  \column{0.5\textwidth}
+
+  \begin{block}{Text Block 1}
+    \begin{itemize}
+      \item Text 1
+    \end{itemize}
+  \end{block}
+
+  \vspace{-0.1in}
+
+  \begin{block}{Text Block 2}
+    \begin{itemize}
+      \item Text 2
+    \end{itemize}
+  \end{block}
+
+
+  \end{columns}
+
+
+
+
+  \end{frame}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 %CALL THIS AT BEGINNING OF BACKUP SLIDES TO EXCLUDE FROM TOTAL COUNT
 \backupbegin
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section*{Backup} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
+\section*{Backup}
+%===============================================================================
 %* makes backup not appear in table of contents
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\frametitle{Backup}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
 \subsection*{Backup Section Name}
 
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%===============================================================================
 \subsection*{References}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\frametitle{Example Citations}
 \cite{knacke1968apollo}
 \cite{mckinney2013boeing}
@@ -265,7 +498,7 @@ You can have a main idea as a title of the block, then discuss it as a paragraph
 
 \end{frame}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[allowframebreaks]\frametitle{References}
 %list all references cited with "\cite"
 %'allowframebreaks' splits content over multiple slides
