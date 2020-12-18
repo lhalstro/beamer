@@ -99,17 +99,18 @@
     %vertical zero to text is bottom of rectangle
 
     %INSERT SLIDE TITLE IN LEFT TOP MARGIN
-    {\node[anchor=west, offwhite,font=\LARGE] at  (0,\picheight/2){ \textbf{\insertframetitle} };}
+    {\node[anchor=west, white,font=\Large] at  (0,\picheight/2){ \textbf{\insertframetitle} };}
 
 
     %INSERT FRAME SECTION AND SUBSECTION IN RIGHT TOP MARGIN, IF THEY EXIST
     \ifx\insertsubsection\@empty%
     %Just insert section
-    {\node[anchor=north west, offwhite, font=\footnotesize , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
+    {\node[anchor=north west, white,    font=\footnotesize , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
     \else%
     %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-    {\node[anchor=north west, offwhite, font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
-    {\node[anchor=north west, white,    font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
+    {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
+    {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
+    % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
     \fi
 
   \end{tikzpicture}
