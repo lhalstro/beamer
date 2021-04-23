@@ -55,6 +55,15 @@
   \newcommand\titlepagenumplusone{2}
 \fi
 
+%hack for no title slide
+\ifnum\slidebeforetitle=-1%
+  %TITLE ON SECOND PAGE
+    %option to have slide before title (e.g. SBU)
+  \renewcommand\titlepagenum{0}
+  %allows for less than or equal to comparison for slide footer assessment
+  \renewcommand\titlepagenumplusone{1}
+\fi
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% BEAMER SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
