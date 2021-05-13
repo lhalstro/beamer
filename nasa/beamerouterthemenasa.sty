@@ -22,6 +22,38 @@
 \newcommand\mybotmargin{0.3cm}
 % \newcommand\mybotmargin{11.3}
 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% %%% SIDEBAR (TABLE OF CONTENTS)
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% %ADD SIDEBAR TABLE OF CONTENTS
+% \ifnum\addsidebar=1%
+%   %need 'height=0pt' to not mess up title theme
+%   \useoutertheme[hideothersubsections,left,height=0pt]{sidebar}
+%   %below code removes title and author from sidebar
+%   \makeatletter
+%     \setbeamertemplate{sidebar \beamer@sidebarside}%{sidebar theme}
+%     {
+%       %this vspace is equivalent to \mytopmargin in beamerouterthemenasa so that TOC is below title
+%       \vspace{0.6cm}
+
+%       \beamer@tempdim=\beamer@sidebarwidth%
+%       \advance\beamer@tempdim by -6pt%
+%       \insertverticalnavigation{\beamer@sidebarwidth}%
+%       \vfill
+%       \ifx\beamer@sidebarside\beamer@lefttext%
+%       \else%
+%         \usebeamercolor{normal text}%
+%         \llap{\usebeamertemplate***{navigation symbols}\hskip0.1cm}%
+%         \vskip2pt%
+%       \fi%
+%   }%
+%   \makeatother
+
+
+%   %make column separation between slide title and section
+% \fi
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% FRAME HEADER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -46,12 +78,12 @@
    \ifx\insertframesubtitle\@empty%
       %INSERT FRAME SECTION AND SUBSECTION IN TOP MARGIN, IF THEY EXIST
       \ifx\insertsubsection\@empty%
-      %Just insert section
-      {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
+        %Just insert section
+        {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
       \else%
-      %Insert Section and Subsection
-      {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
-      {\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){\insertsubsection};}
+        %Insert Section and Subsection
+        {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
+        {\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){\insertsubsection};}
       \fi
       %INSERT SLIDE TITLE BELOW TOP MARGIN
       {\node[anchor=west, black,font=\Large] at  (0,-\picheight/2){ \textbf{\insertframetitle} };}
@@ -104,13 +136,30 @@
 
     %INSERT FRAME SECTION AND SUBSECTION IN RIGHT TOP MARGIN, IF THEY EXIST
     \ifx\insertsubsection\@empty%
-    %Just insert section
-    {\node[anchor=north west, white,    font=\footnotesize , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
+      %Just insert section
+      {\node[anchor=north west, white,    font=\footnotesize , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
     \else%
-    %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-    {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
-    {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
-    % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
+
+      \ifx\insertsubsubsection\@empty%
+        %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
+        {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
+        {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
+        % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
+      \else%
+        %Insert Section and Subsection and Subsubsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
+          %Two lines:
+            % Section | Subsection
+            %     Subsubsection
+        {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection $|$ \insertsubsection};}
+        % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
+        {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsubsection};}
+        % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
+      \fi
+
+      % %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
+      % {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
+      % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
+      % % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
     \fi
 
   \end{tikzpicture}
@@ -278,6 +327,8 @@
 
 
 }
+
+
 
 
 
