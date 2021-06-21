@@ -273,13 +273,25 @@
         \newcommand\framenumbertext{\insertframenumber}
       \fi
 
+      %PAGE NUMBER
       \node (slidenum) [anchor=east, xshift=-\mybotmargin/2, yshift=0]
                         at (\paperwidth,-\paperheight)
                         {\usebeamerfont{author}\framenumbertext};
-
+      %DATE
+      %insert short date if specified, otherwise long date
+      \ifx\beamer@shortdate\@empty%
+          \newcommand{\footerdate}{\usebeamerfont{author}\insertdate}
+      \else
+          \newcommand{\footerdate}{\usebeamerfont{author}\insertshortdate}
+      \fi
       \node (date) [anchor=east, xshift=-\mybotmargin/0.5, yshift=0]
                         at (slidenum)
-                        {\usebeamerfont{author}\insertdate};
+                        {\footerdate};
+
+      % \node (date) [anchor=east, xshift=-\mybotmargin/0.5, yshift=0]
+      %                   at (slidenum)
+      %                   {\usebeamerfont{author}\insertdate};
+
 
       %LEFT FOOTER: AUTHOR'S NAME - INSTITUTE (OR USER SPECIFIED TEXT)
       \ifnum\newfooterleft=1%
