@@ -77,13 +77,23 @@
     %vertical zero to text is bottom of rectangle
    \ifx\insertframesubtitle\@empty%
       %INSERT FRAME SECTION AND SUBSECTION IN TOP MARGIN, IF THEY EXIST
+      \newcommand\AddSectionTitle[1]{\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){#1};}
+      \newcommand\AddSubsectionTitle[1]{\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){#1};}
       \ifx\insertsubsection\@empty%
         %Just insert section
-        {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
+        % {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
+        \AddSectionTitle{\insertsection}
+        % \ifx\beamer@secname\@empty%
+        %   \AddSectionTitle{\insertsection}
+        % \else
+        %   \AddSectionTitle{\secname}
+        % \fi
       \else%
         %Insert Section and Subsection
-        {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
-        {\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){\insertsubsection};}
+        \AddSectionTitle{\insertsection}
+        \AddSubsectionTitle{\insertsubsection}
+        % {\node[anchor=east, white,font=\large] at  (0.496\paperwidth,\picheight/2){\insertsection};}
+        % {\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){\insertsubsection};}
       \fi
       %INSERT SLIDE TITLE BELOW TOP MARGIN
       {\node[anchor=west, black,font=\Large] at  (0,-\picheight/2){ \textbf{\insertframetitle} };}
