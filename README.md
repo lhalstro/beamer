@@ -15,5 +15,4 @@ Custom beamer templates and styles
     - beamer template
     - diagrams
 - Make example for how to put movies in beamer
-- Equivalent Power Point template
-- beamer2powerpoint
+- beamer2powerpoint (see pdf2pptx on github)
