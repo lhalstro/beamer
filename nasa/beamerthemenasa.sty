@@ -28,6 +28,20 @@
       \newcommand\libpath{\string~/lib/beamer/nasa}
   \fi
 }
+
+\ifdef{\usegrid}{}{\newcommand\usegrid{0}} %put 3x3 grid over each slide mimicing matrix display
+\ifdef{\filledtitle}{}{\newcommand\filledtitle{2}} %0: oldschool nasa template with frametitle in line with meatball, 2: sec/subsec above title filled
+\ifdef{\themecolors}{}{\newcommand\themecolors{0}}    %optional: 1 = ucd colors, [other = nasa colors]
+\ifdef{\newfootercenter}{}{\newcommand\newfootercenter{0}} %center footer text: 0=date, 1=footercenter text
+\ifdef{\footercenter}{}{\newcommand\footercenter{new center footer text rather than short title}} %use this for SBU message
+\ifdef{\newfooterleft}{}{\newcommand\newfooterleft{0}} %left footer text: 0=Author (Institute), 1=leftcenter text
+\ifdef{\footerleft}{}{\newcommand\footerleft{new left footer text rather than author/institute}}
+\ifdef{\slidebeforetitle}{}{\newcommand\slidebeforetitle{0}} %Title on first slide: 0. (1: have the title on the second slide (e.g. SBU first))
+\ifdef{\totframesinfoot}{}{\newcommand\totframesinfoot{0}} % 1: total number of frames in footer
+\ifdef{\titletextwidth}{}{\newcommand\titletextwidth{12cm}} %width of title text (default 12cm)
+\ifdef{\titleleftalignfrac}{}{\newcommand\titleleftalignfrac{0.24}} %left alignment of title textbox as fraction of textwidth (default 0.24)
+\ifdef{\titleheightfrac}{}{\newcommand\titleheightfrac{0.775}} %fraction height of (base of (?)) title from top (default 0.775)
+
 \ifdef{\titlebarsingleline}{}{\newcommand\titlebarsingleline{0}}
 \ifdef{\cuibanner}{}{\newcommand\cuibanner{0}}
 \ifdef{\cuitext}{}{\newcommand\cuitext{CUI//SP-EXPT}} %export control cui
