@@ -22,6 +22,31 @@
 \newcommand\mybotmargin{0.3cm}
 % \newcommand\mybotmargin{11.3}
 
+% \newcommand\bigfont{0}
+\ifnum\bigfont=1
+  %title slide
+  \setbeamerfont{title}{size=\huge}
+  \setbeamerfont{subtitle}{size=\Large}
+  % \setbeamerfont{caption name}{size=\large}
+
+  %increase title font sizes if you use a smaller overall font size for the document
+  % \newcommand\fontsizeTitle{\LARGE}
+  \newcommand\fontsizeTitle{\huge}
+  % \newcommand\fontsizeSection{\small}
+  % \newcommand\fontsizeSubsection{\footnotesize}
+  \newcommand\fontsizeSection{\large}
+  \newcommand\fontsizeSubsection{\normalsize}
+  \newcommand\fontsizeTitlepage{\Large}
+  \newcommand\fontsizeTitlepageSub{\normalsize}
+\else
+  %default title font sizes for default global font size
+  \newcommand\fontsizeTitle{\Large}
+  \newcommand\fontsizeSection{\footnotesize}
+  \newcommand\fontsizeSubsection{\scriptsize}
+  \newcommand\fontsizeTitlepage{\large}
+  \newcommand\fontsizeTitlepageSub{\small}
+\fi
+
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%% SIDEBAR (TABLE OF CONTENTS)
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,12 +121,12 @@
         % {\node[anchor=west, white,font=\large] at  (0.504\paperwidth,\picheight/2){\insertsubsection};}
       \fi
       %INSERT SLIDE TITLE BELOW TOP MARGIN
-      {\node[anchor=west, black,font=\Large] at  (0,-\picheight/2){ \textbf{\insertframetitle} };}
+      {\node[anchor=west, black,font=\fontsizeTitle] at  (0,-\picheight/2){ \textbf{\insertframetitle} };}
 
     \else%
     %OPTION TO HAVE SUBTITLE, NOT COMPLETED YET
-    {\node[anchor= west, white,font=\large] at (0.238\paperwidth,\picheight/1.5){\insertframetitle};%
-     \node[anchor= west, white,font=\small] at (0.238\paperwidth,-\picheight/2.5){\insertframesubtitle};}%
+    {\node[anchor= west, white,font=\fontsizeTitlepage] at (0.238\paperwidth,\picheight/1.5){\insertframetitle};%
+     \node[anchor= west, white,font=\fontsizeTitlepageSub] at (0.238\paperwidth,-\picheight/2.5){\insertframesubtitle};}%
     \fi
   \end{tikzpicture}
   \end{beamercolorbox}
@@ -141,28 +166,28 @@
     %vertical zero to text is bottom of rectangle
 
     %INSERT SLIDE TITLE IN LEFT TOP MARGIN
-    {\node[anchor=west, white,font=\Large] at  (0,\picheight/2){ \textbf{\insertframetitle} };}
+    {\node[anchor=west, white,font=\fontsizeTitle] at  (0,\picheight/2){ \textbf{\insertframetitle} };}
 
 
     %INSERT FRAME SECTION AND SUBSECTION IN RIGHT TOP MARGIN, IF THEY EXIST
     \ifx\insertsubsection\@empty%
       %Just insert section
-      {\node[anchor=north west, white,    font=\footnotesize , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
+      {\node[anchor=north west, white,    font=\fontsizeSection , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
     \else%
 
       \ifx\insertsubsubsection\@empty%
         %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-        {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
-        {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
+        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
+        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
         % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
       \else%
         %Insert Section and Subsection and Subsubsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
           %Two lines:
             % Section | Subsection
             %     Subsubsection
-        {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection $|$ \insertsubsection};}
+        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection $|$ \insertsubsection};}
         % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
-        {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsubsection};}
+        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsubsection};}
         % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
       \fi
 
@@ -176,6 +201,7 @@
   \end{beamercolorbox}
 }
 %REDUCE SPACING BETWEEN TITLE BAR AND BODY
+%keywords: topspace
 \addtobeamertemplate{frametitle}{}{\vspace*{-0.1in}}
 
 
@@ -245,6 +271,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%% FRAME FOOTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\ifnum\bigfont=1
+  \setbeamerfont{author}{size=\footnotesize}
+\fi
 
 %Set frame footer appearance.  Include author on left, date in middle, and slide number on right. Frame on top with two lines.
 

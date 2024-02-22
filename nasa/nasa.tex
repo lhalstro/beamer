@@ -14,10 +14,13 @@
     %4. For in handout only (e.g. picture in handout, video in presentation),
     %       use: '\only<beamer:0>{command}' (e.g. "dont show up in beamer")
 
-\documentclass[aspectratio=169, t]{beamer} %frames only
+% \documentclass[aspectratio=169, t]{beamer} %frames only
 % \documentclass[aspectratio=169, t, handout]{beamer} %handout version
 % \documentclass[aspectratio=169, t, notes]{beamer}       %frames + notes
 % \documentclass[aspectratio=169, t, notes=only]{beamer}   %only notes
+% \newcommand\bigfont{0}
+\documentclass[aspectratio=169, t, 8pt]{beamer} %frames only (use 8pt font with `bigfont=1' to decrease fontsize in body)
+\newcommand\bigfont{1}
 
 %SOURCE BEAMER THEME LOCALLY OR REMOTELY
     %0 if all .sty and image files located in same directory as .tex
