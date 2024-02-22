@@ -7,6 +7,7 @@
 \RequirePackage{tikz} %make vector graphics, etc
 \RequirePackage{textpos} %position pictures
 \RequirePackage[nomessages]{fp}% Allows direct evaluation of simple aritmetic for function inputs
+\RequirePackage{xcolor} %custom colors
 
 % %TAKE 'FIGURE' OUT OF CAPTIONS
 % \RequirePackage{caption}          %caption graphics w/o figure environment with '\captionof{figure}{text}'
@@ -20,9 +21,20 @@
 
 %-------------------------------------------------------------------------------
 %DEFAULT INPUTS
+\ifdef{\libpath}{}{
+  \ifnum\runlocal=1%
+      \newcommand\libpath{.}
+  \else%
+      \newcommand\libpath{\string~/lib/beamer/nasa}
+  \fi
+}
+\ifdef{\titlebarsingleline}{}{\newcommand\titlebarsingleline{0}}
 \ifdef{\cuibanner}{}{\newcommand\cuibanner{0}}
 \ifdef{\cuitext}{}{\newcommand\cuitext{CUI//SP-EXPT}} %export control cui
-\ifdef{\titlebarsingleline}{}{\newcommand\titlebarsingleline{0}}
+\ifdef{\itarnotice}{}{\newcommand\itarnotice{0}}
+\ifdef{\itartext}{}{\newcommand\itartext{\input{\libpath/itarnotice.txt}}}
+\ifdef{\itartextwidth}{}{\newcommand\itartextwidth{15cm}}
+
 
 
 \usepackage{substr}
@@ -67,17 +79,16 @@
 
 %-------------------------------------------------------------------------------
 %CUSTOM COLORS
-\usepackage{xcolor} %custom colors
 %check if variable for other colors exists
-\ifdefined\themecolors
+% \ifdef{\themecolors}{
     \ifnum\themecolors=1%
         %UC DAVIS COLORS
         %gold
         \definecolor{nasared}{RGB}{201, 151, 0}
         %blue
         \definecolor{nasablue}{RGB}{0, 40, 85}
-    \fi
-\else
+   \else
+% }{
     %NASA COLORS (DEFAULT)
     % %my version of the nasa colors
     % \definecolor{nasared}{RGB}{252, 61, 33}
@@ -85,7 +96,8 @@
     %actual NASA colors (from https://www.nasa.gov/nasa-brand-center/brand-guidelines/#:~:text=Insignia%20Colors,use%20these%20guidelines)
     \definecolor{nasared}{RGB}{228, 0, 43}
     \definecolor{nasablue}{RGB}{0, 50, 160}
-\fi
+  \fi
+% }
 
 \definecolor{cuipurple}{RGB}{125 101 158}
 \definecolor{offwhite}{gray}{0.9} %greyish white, just on dark backgrounds
@@ -129,18 +141,10 @@
 %%% BEAMER SETTINGS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%USE CUSTOM STYLE FILES
-\ifnum\runlocal=1%
-    %.sty files located locally
-    \useinnertheme{nasa}
-    \useoutertheme{nasa}
-    \usecolortheme{nasa}
-\else%
-    %find .sty files with absolute path
-    \usepackage{\string~/lib/beamer/nasa/beamerinnerthemenasa}
-    \usepackage{\string~/lib/beamer/nasa/beamerouterthemenasa}
-    \usepackage{\string~/lib/beamer/nasa/beamercolorthemenasa}
-\fi%
+%USE CUSTOM BEAMER STYLE FILES
+\usepackage{\libpath/beamerinnerthemenasa}
+\usepackage{\libpath/beamerouterthemenasa}
+\usepackage{\libpath/beamercolorthemenasa}
 
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{blocks}[rounded][shadow=true]

@@ -104,10 +104,22 @@
       \usebeamerfont{title}\inserttitle\par%
       \usebeamerfont{subtitle}\insertsubtitle\par%
     \end{beamercolorbox}%
+
+    \ifnum\itarnotice=1
+      % \vskip0.015\paperheight
+      \FPeval{secondboxheightfrac}{0.75-\titleheightfrac} %get author height to be constant
+      \FPeval{authorheightfrac}{0.1} %get author height to be constant
+      \begin{beamercolorbox}[ht=\secondboxheightfrac\paperheight, wd=\itartextwidth,leftskip=\titleleftalignfrac\textwidth,#1]{title page header}
+        \textcolor{nasared}{\fontsizeHeaderFooter\itartext}
+      \end{beamercolorbox}%
+    \else
+      \FPeval{authorheightfrac}{0.85-\titleheightfrac} %get author height to be constant
+    \fi
+
     %TEXTBOX FOR AUTHOR
-    % \vskip0.75cm%
-    % \vskip0.065\paperheight%
-    \FPeval{authorheightfrac}{0.85-\titleheightfrac} %get author height to be constant
+    % % \vskip0.75cm%
+    % % \vskip0.065\paperheight%
+    % \FPeval{authorheightfrac}{0.85-\titleheightfrac} %get author height to be constant
     % 0.065
     \begin{beamercolorbox}[wd=12cm,ht=\authorheightfrac\paperheight,leftskip=0.2675\textwidth,#1]{author}
       \usebeamerfont{author}\insertauthor%

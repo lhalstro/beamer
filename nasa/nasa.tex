@@ -20,9 +20,6 @@
 % \documentclass[aspectratio=169, t, notes]{beamer}       %frames + notes
 % \documentclass[aspectratio=169, t, notes=only]{beamer}   %only notes
 
-\newcommand\cuibanner{1}
-\newcommand\cuitext{CUI//SP-EXPT//DL ONLY}
-% \newcommand\titlebarsingleline{1}
 
 %SOURCE BEAMER THEME LOCALLY OR REMOTELY
     %0 if all .sty and image files located in same directory as .tex
@@ -39,16 +36,22 @@
 \newcommand\totframesinfoot{0} % 1: total number of frames in footer
 \newcommand\titletextwidth{12cm} %width of title text (default 12cm)
 \newcommand\titleleftalignfrac{0.24} %left alignment of title textbox as fraction of textwidth (default 0.24)
-\newcommand\titleheightfrac{0.775} %fraction hight of title (base?) from top (default 0.775)
+% \newcommand\titleheightfrac{0.775} %fraction height of (base of (?)) title from top (default 0.775)
+\newcommand\titleheightfrac{0.575} %fraction height of (base of (?)) title from top (default 0.775)
+% \newcommand\titlebarsingleline{1} %default 0 unless cui banner
+\newcommand\cuibanner{1}
+% \newcommand\cuitext{CUI//SP-EXPT//DL ONLY} %default "CUI//SP-EXPT"
+\newcommand\itarnotice{1}
+% \newcommand\itartextwidth{15cm} %default 15cm
+
+%-------------------------------------------------
+%LOAD CUSTOM BEAMER CLASS
 \ifnum\runlocal=1%
-    %USE BEAMER THEME LOCALLY
-    \usetheme{nasa}
+    \newcommand\libpath{.}
 \else%
-    %USE BEAMER THEME REMOTELY
-    %Path to remote beamer template location
-    \newcommand\remote{\string~/lib/beamer/nasa}
-    \usepackage{\remote/beamerthemenasa}
+    \newcommand\libpath{\string~/lib/beamer/nasa}
 \fi%
+\usepackage{\libpath/beamerthemenasa}
 
 %CUSTOM BEAMER TEMPLATE FORMATTING
 \usepackage{caption}  %caption graphics w/o figure environment with '\captionof*{figure}{text}' ('*' omits 'Figure')
@@ -129,9 +132,9 @@
     \newcommand\EGlogo{Images/NASA_Meatball.png}
     \newcommand\SLSpic{Images/Orion_SLS_trim.png}
 \else%
-    \newcommand\EGlogo{\remote/Images/NASA_Meatball.png}
-    % \newcommand\SLSpic{\remote/Images/Orion_SLS_trim.png}
-    \newcommand\SLSpic{\remote/Images/SLS_Orange.png}
+    \newcommand\EGlogo{\libpath/Images/NASA_Meatball.png}
+    % \newcommand\SLSpic{\libpath/Images/Orion_SLS_trim.png}
+    \newcommand\SLSpic{\libpath/Images/SLS_Orange.png}
 \fi%
 %ADD IMAGES TO TITTLE SLIDE
 \addtobeamertemplate{title page}
