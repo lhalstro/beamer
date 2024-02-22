@@ -22,8 +22,6 @@
 \newcommand\mybotmargin{0.3cm}
 % \newcommand\mybotmargin{11.3}
 
-% \newcommand\bigfont{0}
-
 %-------------------------------------------------------------------------------
 %CONSISTENT FONT SIZES
 %Fixed font sizes to maintain consistency when changing documentclass font size
@@ -39,22 +37,25 @@
     % huge: 20.74pt
     % Huge: 24.88pt
   %rule-of-thumb is skipsize=1.2*fontsize (second input to \fontsize)
-\newcommand\fontsizeTitle{\fontsize{14.4pt}{17.28}\selectfont} %\Large for default documentclass (11pt)
+% \newcommand\fontsizeTitle{\fontsize{14.4pt}{17.28}\selectfont} %\Large for default documentclass (11pt)
+\newcommand\fontsizeTitle{\fontsize{12pt}{14.4}\selectfont} %\Large for default documentclass (11pt)
 \newcommand\fontsizeTitlepage{\fontsize{12pt}{14.4}\selectfont} %\large for default documentclass (11pt)
 \newcommand\fontsizeTitlepageSub{\fontsize{10pt}{12}\selectfont} %\small for default documentclass (11pt)
 \newcommand\fontsizeSection{\fontsize{9pt}{10.8}\selectfont} %\footnotesize for default documentclass (11pt)
 \newcommand\fontsizeSubsection{\fontsize{8pt}{9.6}\selectfont} %\scriptsize for default documentclass (11pt)
+\newcommand\fontsizeHeaderFooter{\fontsize{6pt}{7.2}\selectfont} %\tiny for default documentclass (11pt)
+\setbeamerfont{author}{size=\fontsize{10.95pt}{13.14}\selectfont} %\normalsize for default documentclass (11pt)
+\setbeamerfont{title}{size=\fontsize{14.4pt}{17.28}\selectfont} %\Large for default documentclass (11pt)
+\setbeamerfont{subtitle}{size=\fontsize{12pt}{14.4}\selectfont} %\large for default documentclass (11pt)
 
 \ifnum\bigfont=1
-  %title slide
-  \setbeamerfont{title}{size=\huge}
-  \setbeamerfont{subtitle}{size=\Large}
-  % \setbeamerfont{caption name}{size=\large}
   %both move subsedtion title down a bit down with smaller global font:
   \newcommand\SubSectionTitleYshift{0.15cm}%0.25cm (decrease to lower height)
 \else
   \newcommand\SubSectionTitleYshift{0.25cm}%0.25cm
 \fi
+\newcommand\SectionTitleHeightShift{0.05cm} %move section title node up a bit to align in slide title bar
+  % DEVEL NOTE: ^^^ slightly inconsistent result for different options of `bigfont'
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % %%% SIDEBAR (TABLE OF CONTENTS)
@@ -151,17 +152,21 @@
 %like oldschool basic nasa template
 \else%
 
-
-
 %%% 2020 FILLED TITLE OPTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \ifnum\filledtitle=2%
 \defbeamertemplate*{frametitle}{texsx}[1][]
 {
 
-  \renewcommand\picheight{0.75cm}
-  \newcommand\SectionTitleHeightShift{0.05cm} %move section title node up a bit to align in slide title bar
-    % DEVEL NOTE: ^^^ slightly inconsistent result for different options of `bigfont'
-  %Remove little white space at top
+  \renewcommand\picheight{0.75cm} %top of slide
+  \ifnum\cuibanner=1
+    \renewcommand\titlebarsingleline{1} %need to have single-line title bar if there's a cui banner
+  \else
+    \ifnum\titlebarsingleline=1
+      \renewcommand\picheight{0.5cm} %top of slide not as high if single-line title and no cui banner
+    \fi
+  \fi
+
+    %Remove little white space at top
   \vspace{-0.03cm}
   \begin{beamercolorbox}[wd=\paperwidth, ht=\picheight]{frametitle}
   \begin{tikzpicture}
@@ -170,43 +175,58 @@
     %this box holds everything in place, you need it
     \useasboundingbox[fill=white](0,0) rectangle(\paperwidth,\picheight);
 
+  %CUI BANNER
+  \ifnum\cuibanner=1
+    %move titlebar down below CUI banner
+    \newcommand\TitleBarHeight{0.66*\picheight}
+    \newcommand\CUIBannerHeight{0.68*\picheight}
+
+    \fill[cuipurple] (0,\picheight) rectangle(1.0\paperwidth,\CUIBannerHeight);
+    {\node(cui)[anchor=center, white, font=\fontsizeHeaderFooter, yshift=0] at (0.5*\paperwidth,0.5*\picheight+0.5*\CUIBannerHeight){\textbf{\cuitext}};}
+
+  \else
+    %title bar at top of slide
+    \newcommand\TitleBarHeight{1.0*\picheight}
+  \fi
+
   %RED AND BLUE OFFCENTER
-  \fill[nasared,opacity=0.75] (0,0) rectangle(0.694\paperwidth,\picheight); %left color bar
-  \fill[nasablue,opacity=0.75] (0.706\paperwidth,0) rectangle(\paperwidth,\picheight); %right color bar
+  \fill[nasared,opacity=0.75] (0,0) rectangle(0.694\paperwidth,\TitleBarHeight); %left color bar
+  \fill[nasablue,opacity=0.75] (0.706\paperwidth,0) rectangle(\paperwidth,\TitleBarHeight); %right color bar
    %ADD TITLES
     %vertical zero to text is bottom of rectangle
 
     %INSERT SLIDE TITLE IN LEFT TOP MARGIN
-    {\node[anchor=west, white,font=\fontsizeTitle] at  (0,\picheight/2){ \textbf{\insertframetitle} };}
+    {\node[anchor=west, white,font=\fontsizeTitle] at  (0,\TitleBarHeight/2){ \textbf{\insertframetitle} };}
 
 
     %INSERT FRAME SECTION AND SUBSECTION IN RIGHT TOP MARGIN, IF THEY EXIST
     \ifx\insertsubsection\@empty%
-      %Just insert section
-      {\node[anchor=north west, white,    font=\fontsizeSection , yshift=\SectionTitleHeightShift] at  (0.706\paperwidth,\picheight){\insertsection};}
+      %just section title, top line
+      \newcommand\FirstLineText{\insertsection}
     \else%
-
       \ifx\insertsubsubsection\@empty%
-        %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\SectionTitleHeightShift] at  (0.706\paperwidth,\picheight){\insertsection};}
-        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=\SubSectionTitleYshift, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
-        % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
-      \else%
-        %Insert Section and Subsection and Subsubsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-          %Two lines:
-            % Section | Subsection
-            %     Subsubsection
-        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\SectionTitleHeightShift] at  (0.706\paperwidth,\picheight){\insertsection $|$ \insertsubsection};}
-        % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
-        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=\SubSectionTitleYshift, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsubsection};}
-        % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
+        %section title top line, subsection title bottom line
+        \ifnum\titlebarsingleline=1
+          \newcommand\FirstLineText{\insertsection~$|$~\insertsubsection}
+        \else
+          \newcommand\FirstLineText{\insertsection}
+          \newcommand\SecondLineText{\insertsubsection}
+        \fi
+      \else
+        % "Section Title | Subsection Title" top line, Subsubsection title bottom line
+        \ifnum\titlebarsingleline=1
+          \newcommand\FirstLineText{\insertsection~$|$~\insertsubsection~$|$~\insertsubsubsection}
+          \newcommand\SecondLineText{\insertsubsubsection}
+        \else
+          \newcommand\FirstLineText{\insertsection $|$ \insertsubsection}
+          \newcommand\SecondLineText{\insertsubsubsection}
+        \fi
       \fi
-
-      % %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-      % {\node (sec) [anchor=north west, white,    font=\footnotesize , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
-      % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
-      % % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
     \fi
+    %Add the actual section text
+    \ifdef{\FirstLineText }{ {\node (sec) [anchor=north west, white,    font=\fontsizeSection ,      yshift=\SectionTitleHeightShift]                        at  (0.706\paperwidth,\TitleBarHeight){\FirstLineText};} }{}
+    \ifdef{\SecondLineText}{ {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=\SubSectionTitleYshift, xshift=0.008\paperwidth] at  (sec.south west){\SecondLineText};} }{}
+
 
   \end{tikzpicture}
   \end{beamercolorbox}
@@ -283,10 +303,6 @@
 %%% FRAME FOOTER %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\ifnum\bigfont=1
-  \setbeamerfont{author}{size=\footnotesize}
-\fi
-
 %Set frame footer appearance.  Include author on left, date in middle, and slide number on right. Frame on top with two lines.
 
 \setbeamertemplate{footline}{
@@ -325,15 +341,15 @@
       \fi
 
       %PAGE NUMBER
-      \node (slidenum) [anchor=east, xshift=-\mybotmargin/2, yshift=0]
+      \node (slidenum) [anchor=east, font=\fontsizeHeaderFooter, xshift=-\mybotmargin/2, yshift=0]
                         at (\paperwidth,-\paperheight)
-                        {\usebeamerfont{author}\framenumbertext};
+                        {\framenumbertext};
       %DATE
       %insert short date if specified, otherwise long date
       \ifx\beamer@shortdate\@empty%
-          \newcommand{\footerdate}{\usebeamerfont{author}\insertdate}
+          \newcommand{\footerdate}{\fontsizeHeaderFooter \insertdate}
       \else
-          \newcommand{\footerdate}{\usebeamerfont{author}\insertshortdate}
+          \newcommand{\footerdate}{\fontsizeHeaderFooter \insertshortdate}
       \fi
       \node (date) [anchor=east, xshift=-\mybotmargin/0.5, yshift=0]
                         at (slidenum)
@@ -354,13 +370,13 @@
             \renewcommand\footerleft{}
           \else%
             %If author NOT defined AND institute is defined, we don't need the seperator text
-            \renewcommand\footerleft{\usebeamerfont{author} \insertshortinstitute}
+            \renewcommand\footerleft{\fontsizeHeaderFooter  \insertshortinstitute}
           \fi
         \else
           \ifx\insertinstitute\@empty%
-            \renewcommand\footerleft{\usebeamerfont{author}\insertshortauthor}
+            \renewcommand\footerleft{\fontsizeHeaderFooter \insertshortauthor}
           \else%
-            \renewcommand\footerleft{\usebeamerfont{author}\insertshortauthor ~ \textendash ~ \insertshortinstitute}
+            \renewcommand\footerleft{\fontsizeHeaderFooter \insertshortauthor ~ \textendash ~ \insertshortinstitute}
           \fi
         \fi
         % \renewcommand\footerleft{\usebeamerfont{author}\insertshortauthor\expandafter\beamer@ifempty\expandafter{\beamer@shortinstitute}{}{\beamer@ifempty\expandafter{\beamer@shortauthor}{}{~ \textendash ~ }  \insertshortinstitute} }
@@ -381,7 +397,7 @@
       %                   {\usebeamerfont{author}\insertdate};
       \node (date) [anchor=center, xshift=0, yshift=0]
                         at (\paperwidth/2,-\paperheight)
-                        {\usebeamerfont{author}\footercenter};
+                        {\fontsizeHeaderFooter \footercenter};
 
 
     \end{tikzpicture}

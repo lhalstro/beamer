@@ -18,6 +18,30 @@
 % \usepackage{hyperref}
 % \hypersetup{colorlinks,urlcolor=blue}
 
+
+\usepackage{substr}
+%Set options based on arguments passed to Beamer class
+\newcommand\bigfont{0}
+\IfSubStringInString{pt}{\@classoptionslist}{
+  %user declared a document font size in documentclass
+  \IfSubStringInString{11pt}{\@classoptionslist}{
+    %user declared document font to be default, do nothing
+  }{
+    %ASSUME they are asking for a smaller font and adjust spacings accordingly
+    \renewcommand\bigfont{1}
+  }{}
+}{}
+
+
+
+%DEFAULT INPUTS
+\ifdef{\cuibanner}{}{\newcommand\cuibanner{0}}
+\ifdef{\cuitext}{}{\newcommand\cuitext{CUI//SP-EXPT}} %export control cui
+\ifdef{\titlebarsingleline}{}{\newcommand\titlebarsingleline{0}}
+\ifdef{\bigfont}{}{\newcommand\bigfont{0}}
+
+
+
 %CUSTOM COLORS
 \usepackage{xcolor} %custom colors
 %check if variable for other colors exists
@@ -39,6 +63,7 @@
     \definecolor{nasablue}{RGB}{0, 50, 160}
 \fi
 
+\definecolor{cuipurple}{RGB}{125 101 158}
 \definecolor{offwhite}{gray}{0.9} %greyish white, just on dark backgrounds
 
 %colors matching my matplotlib colormap

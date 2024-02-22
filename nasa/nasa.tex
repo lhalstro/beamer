@@ -14,15 +14,15 @@
     %4. For in handout only (e.g. picture in handout, video in presentation),
     %       use: '\only<beamer:0>{command}' (e.g. "dont show up in beamer")
 
+\documentclass[aspectratio=169, t, 8pt]{beamer} %frames only (use 8pt font for smaller text)
 % \documentclass[aspectratio=169, t]{beamer} %frames only
 % \documentclass[aspectratio=169, t, handout]{beamer} %handout version
 % \documentclass[aspectratio=169, t, notes]{beamer}       %frames + notes
 % \documentclass[aspectratio=169, t, notes=only]{beamer}   %only notes
-% \newcommand\bigfont{0}
-\documentclass[aspectratio=169, t, 8pt]{beamer} %frames only (use 8pt font with `bigfont=1' to decrease fontsize in body)
-\newcommand\bigfont{1}
-% \documentclass[aspectratio=169, t]{beamer} %frames only
-% \newcommand\bigfont{0}
+
+\newcommand\cuibanner{1}
+\newcommand\cuitext{CUI//SP-EXPT//DL ONLY}
+% \newcommand\titlebarsingleline{1}
 
 %SOURCE BEAMER THEME LOCALLY OR REMOTELY
     %0 if all .sty and image files located in same directory as .tex
@@ -107,6 +107,7 @@
 \makeatletter
   \newcommand\thefontsize[1]{{#1 \f@size pt\par}}
   \makeatother
+
 
 
 
@@ -220,20 +221,15 @@
 %===============================================================================
 
 
-
-
-
 %===============================================================================
 \subsection{Subsection 1a}\label{Sub1a}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}\frametitle{Title: Section \thesection Subsection \thesubsection}
 % \framesubtitle{Subtitle}
 Demonstrates sections and subsections
 
-\begin{block}{Font Sizes:}
+\begin{block}{Font Sizes: }
 
 tiny: \thefontsize\tiny
 
