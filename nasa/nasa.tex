@@ -33,7 +33,7 @@
 \newcommand\newfooterleft{0} %[0] left footer text: 0=Author (Institute), 1=leftcenter text
 \newcommand\footerleft{new left footer text rather than author/institute}
 \newcommand\slidebeforetitle{0} %Title on first slide: 0. (1: have the title on the second slide (e.g. SBU first))
-\newcommand\totframesinfoot{0} % 1: total number of frames in footer
+\newcommand\totframesinfoot{1} % 1: total number of frames in footer
 \newcommand\titletextwidth{12cm} %width of title text (default 12cm)
 \newcommand\titleleftalignfrac{0.24} %left alignment of title textbox as fraction of textwidth (default 0.24)
 % \newcommand\titleheightfrac{0.775} %fraction height of (base of (?)) title from top (default 0.775)
@@ -126,30 +126,36 @@
 \institute{NASA}
 \date{\today}
 
-%LOAD IMAGES FOR TITLE SLIDE
-%Paths to images:
-\ifnum\runlocal=1%
-    \newcommand\EGlogo{Images/NASA_Meatball.png}
-    \newcommand\SLSpic{Images/Orion_SLS_trim.png}
-\else%
-    \newcommand\EGlogo{\libpath/Images/NASA_Meatball.png}
-    % \newcommand\SLSpic{\libpath/Images/Orion_SLS_trim.png}
-    \newcommand\SLSpic{\libpath/Images/SLS_Orange.png}
-\fi%
 %ADD IMAGES TO TITTLE SLIDE
 \addtobeamertemplate{title page}
 {
-%Not sure how positioning works, (-1cm,0cm for upper left corner apparently)
-\begin{textblock*}{0cm}(-0.5cm,0.5cm) %Textbox witdh, then coords of center
-\includegraphics[scale=0.5]{\EGlogo}
-\end{textblock*}
+  %Column of logos on the left
+  %NASA logo
+  \begin{textblock*}{0cm}(-0.47cm,0.005\textheight) %Textbox width, then coords of center
+    \includegraphics[height=0.175\textheight]{\libpath/Images/NASA_Meatball.png}
+    \end{textblock*}
 
-% \begin{textblock*}{0cm}(0.84\textwidth,0.25cm)
-% \includegraphics[height=\textheight]{\SLSpic}
-% \end{textblock*}
-\begin{textblock*}{0cm}(0.7\textwidth,0.25cm)
-\includegraphics[height=\textheight]{\SLSpic}
-\end{textblock*}
+  %Artemis Logo
+  \begin{textblock*}{0cm}(-0.47cm,0.2\textheight) %Textbox witdh, coords of center
+  \includegraphics[height=0.175\textheight]{\libpath/Images/Artemis_logo.png}
+  % \vspace{-0.4in}
+  % \hspace{0.125in}\textcolor{white}{HRVIP}
+  \end{textblock*}
+
+  %Orion Logo
+  \begin{textblock*}{0cm}(-0.47cm,0.4\textheight) %Textbox witdh, coords of center
+    \includegraphics[height=0.175\textheight]{\libpath/Images/Orion_logo.png}
+    % \vspace{-0.4in}
+    % \hspace{0.125in}\textcolor{white}{HRVIP}
+    \end{textblock*}
+
+  % \begin{textblock*}{0cm}(0.84\textwidth,0.25cm)
+  % \includegraphics[height=\textheight]{\SLSpic}
+  % \end{textblock*}
+  \begin{textblock*}{0cm}(0.7\textwidth,0.25cm)
+  % \includegraphics[height=\textheight]{\libpath/Images/SLS_Orange.png}
+  \includegraphics[height=0.5\textheight]{\libpath/Images/Orion_ArtemisI_Selfie.png}
+  \end{textblock*}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
