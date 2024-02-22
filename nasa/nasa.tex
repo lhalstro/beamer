@@ -21,6 +21,8 @@
 % \newcommand\bigfont{0}
 \documentclass[aspectratio=169, t, 8pt]{beamer} %frames only (use 8pt font with `bigfont=1' to decrease fontsize in body)
 \newcommand\bigfont{1}
+% \documentclass[aspectratio=169, t]{beamer} %frames only
+% \newcommand\bigfont{0}
 
 %SOURCE BEAMER THEME LOCALLY OR REMOTELY
     %0 if all .sty and image files located in same directory as .tex
@@ -102,7 +104,9 @@
 
 
 
-
+\makeatletter
+  \newcommand\thefontsize[1]{{#1 \f@size pt\par}}
+  \makeatother
 
 
 
@@ -228,6 +232,30 @@
 \begin{frame}\frametitle{Title: Section \thesection Subsection \thesubsection}
 % \framesubtitle{Subtitle}
 Demonstrates sections and subsections
+
+\begin{block}{Font Sizes:}
+
+tiny: \thefontsize\tiny
+
+scriptsize: \thefontsize\scriptsize
+
+footnotesize: \thefontsize\footnotesize
+
+small: \thefontsize\small
+
+normalsize: \thefontsize\normalsize
+
+large: \thefontsize\large
+
+Large: \thefontsize\Large
+
+LARGE: \thefontsize\LARGE
+
+huge: \thefontsize\huge
+
+Huge: \thefontsize\Huge
+\end{block}
+
 \end{frame}
 
 %===============================================================================

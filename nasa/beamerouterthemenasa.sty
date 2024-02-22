@@ -23,28 +23,37 @@
 % \newcommand\mybotmargin{11.3}
 
 % \newcommand\bigfont{0}
+
+%-------------------------------------------------------------------------------
+%CONSISTENT FONT SIZES
+%Fixed font sizes to maintain consistency when changing documentclass font size
+  %default font sizes (documentclass 11pt)
+    % tiny: 6pt
+    % scriptsize: 8pt
+    % footnotesize: 9pt
+    % small: 10pt
+    % normalsize: 10.95pt
+    % large: 12pt
+    % Large: 14.4pt
+    % LARGE: 17.28pt
+    % huge: 20.74pt
+    % Huge: 24.88pt
+  %rule-of-thumb is skipsize=1.2*fontsize (second input to \fontsize)
+\newcommand\fontsizeTitle{\fontsize{14.4pt}{17.28}\selectfont} %\Large for default documentclass (11pt)
+\newcommand\fontsizeTitlepage{\fontsize{12pt}{14.4}\selectfont} %\large for default documentclass (11pt)
+\newcommand\fontsizeTitlepageSub{\fontsize{10pt}{12}\selectfont} %\small for default documentclass (11pt)
+\newcommand\fontsizeSection{\fontsize{9pt}{10.8}\selectfont} %\footnotesize for default documentclass (11pt)
+\newcommand\fontsizeSubsection{\fontsize{8pt}{9.6}\selectfont} %\scriptsize for default documentclass (11pt)
+
 \ifnum\bigfont=1
   %title slide
   \setbeamerfont{title}{size=\huge}
   \setbeamerfont{subtitle}{size=\Large}
   % \setbeamerfont{caption name}{size=\large}
-
-  %increase title font sizes if you use a smaller overall font size for the document
-  % \newcommand\fontsizeTitle{\LARGE}
-  \newcommand\fontsizeTitle{\huge}
-  % \newcommand\fontsizeSection{\small}
-  % \newcommand\fontsizeSubsection{\footnotesize}
-  \newcommand\fontsizeSection{\large}
-  \newcommand\fontsizeSubsection{\normalsize}
-  \newcommand\fontsizeTitlepage{\Large}
-  \newcommand\fontsizeTitlepageSub{\normalsize}
+  %both move subsedtion title down a bit down with smaller global font:
+  \newcommand\SubSectionTitleYshift{0.15cm}%0.25cm (decrease to lower height)
 \else
-  %default title font sizes for default global font size
-  \newcommand\fontsizeTitle{\Large}
-  \newcommand\fontsizeSection{\footnotesize}
-  \newcommand\fontsizeSubsection{\scriptsize}
-  \newcommand\fontsizeTitlepage{\large}
-  \newcommand\fontsizeTitlepageSub{\small}
+  \newcommand\SubSectionTitleYshift{0.25cm}%0.25cm
 \fi
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -150,6 +159,8 @@
 {
 
   \renewcommand\picheight{0.75cm}
+  \newcommand\SectionTitleHeightShift{0.05cm} %move section title node up a bit to align in slide title bar
+    % DEVEL NOTE: ^^^ slightly inconsistent result for different options of `bigfont'
   %Remove little white space at top
   \vspace{-0.03cm}
   \begin{beamercolorbox}[wd=\paperwidth, ht=\picheight]{frametitle}
@@ -172,22 +183,22 @@
     %INSERT FRAME SECTION AND SUBSECTION IN RIGHT TOP MARGIN, IF THEY EXIST
     \ifx\insertsubsection\@empty%
       %Just insert section
-      {\node[anchor=north west, white,    font=\fontsizeSection , yshift=\picheight/6] at  (0.706\paperwidth,\picheight){\insertsection};}
+      {\node[anchor=north west, white,    font=\fontsizeSection , yshift=\SectionTitleHeightShift] at  (0.706\paperwidth,\picheight){\insertsection};}
     \else%
 
       \ifx\insertsubsubsection\@empty%
         %Insert Section and Subsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
-        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection};}
-        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
+        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\SectionTitleHeightShift] at  (0.706\paperwidth,\picheight){\insertsection};}
+        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=\SubSectionTitleYshift, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
         % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
       \else%
         %Insert Section and Subsection and Subsubsection (0 is bottom of colorbar, \picheight is top, \picheight/2 is middle)
           %Two lines:
             % Section | Subsection
             %     Subsubsection
-        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\picheight/7] at  (0.706\paperwidth,\picheight){\insertsection $|$ \insertsubsection};}
+        {\node (sec) [anchor=north west, white,    font=\fontsizeSection , yshift=\SectionTitleHeightShift] at  (0.706\paperwidth,\picheight){\insertsection $|$ \insertsubsection};}
         % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsection};}
-        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=0.25cm, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsubsection};}
+        {\node       [anchor=north west, offwhite, font=\fontsizeSubsection ,   yshift=\SubSectionTitleYshift, xshift=0.008\paperwidth] at  (sec.south west){\insertsubsubsection};}
         % {\node       [anchor=north west, offwhite, font=\scriptsize ,   yshift=\picheight/7, xshift=0.008\paperwidth] at  (0.706\paperwidth,\picheight/2){\insertsubsection};}
       \fi
 
